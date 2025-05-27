@@ -8,7 +8,6 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
 
-import java.math.RoundingMode;
 import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -82,7 +81,7 @@ class FastDecimalTest {
             FastDecimal a = FastDecimal.of("2.5");
             FastDecimal b = FastDecimal.of("3");
             assertEquals("7.5", a.multiply(b).toString());
-            assertEquals("0", a.multiply(FastDecimal.ZERO()).toString());
+            assertEquals("0", a.multiply(FastDecimal.ZERO).toString());
         }
 
         @Test
@@ -91,7 +90,7 @@ class FastDecimalTest {
             FastDecimal a = FastDecimal.of("7.5");
             FastDecimal b = FastDecimal.of("2.5");
             assertEquals("3", a.divide(b).toString());
-            assertThrows(ArithmeticException.class, () -> a.divide(FastDecimal.ZERO()));
+            assertThrows(ArithmeticException.class, () -> a.divide(FastDecimal.ZERO));
         }
     }
 
@@ -184,6 +183,7 @@ class FastDecimalTest {
             assertEquals(1L, value.longValue());
             assertEquals(1.23d, value.doubleValue(), 0.000001);
             assertEquals("1.23", value.toString());
+            assertEquals(12300L, value.getRawValue());
         }
     }
 
@@ -193,9 +193,9 @@ class FastDecimalTest {
         @Test
         @DisplayName("Test predefined constants")
         void testConstants() {
-            assertEquals("0", FastDecimal.ZERO().toString());
-            assertEquals("1", FastDecimal.ONE().toString());
-            assertEquals("10", FastDecimal.TEN().toString());
+            assertEquals("0", FastDecimal.ZERO.toString());
+            assertEquals("1", FastDecimal.ONE.toString());
+            assertEquals("10", FastDecimal.TEN.toString());
         }
     }
 
