@@ -1,4 +1,4 @@
-package org.tlr.fastdecimal;
+package org.tlr.fastdecimal.core;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
@@ -127,11 +127,11 @@ class FastDecimalTest {
     class SignTests {
         @ParameterizedTest
         @CsvSource({
-            "1.23, true",
-            "0.01, true",
-            "0, false",
-            "-0.01, false",
-            "-1.23, false"
+                "1.23, true",
+                "0.01, true",
+                "0, false",
+                "-0.01, false",
+                "-1.23, false"
         })
         @DisplayName("Test isPositive")
         void testIsPositive(String value, boolean expected) {
@@ -161,11 +161,11 @@ class FastDecimalTest {
     class ScaleTests {
         @ParameterizedTest
         @CsvSource({
-            "1.23, 2",
-            "1.0, 0",
-            "1, 0",
-            "1.230, 2",
-            "0.001, 3"
+                "1.23, 2",
+                "1.0, 0",
+                "1, 0",
+                "1.230, 2",
+                "0.001, 3"
         })
         @DisplayName("Test scale")
         void testScale(String value, int expectedScale) {
@@ -201,10 +201,10 @@ class FastDecimalTest {
 
     static Stream<Arguments> edgeCases() {
         return Stream.of(
-            Arguments.of("0.0001", "Smallest positive"),
-            Arguments.of("-0.0001", "Largest negative"),
-            Arguments.of("9999999.9999", "Large positive"),
-            Arguments.of("-9999999.9999", "Large negative")
+                Arguments.of("0.0001", "Smallest positive"),
+                Arguments.of("-0.0001", "Largest negative"),
+                Arguments.of("9999999.9999", "Large positive"),
+                Arguments.of("-9999999.9999", "Large negative")
         );
     }
 

@@ -1,4 +1,4 @@
-package org.tlr.fastdecimal;
+package org.tlr.fastdecimal.core;
 
 import org.junit.jupiter.api.Test;
 import org.openjdk.jmh.annotations.Mode;
@@ -38,10 +38,10 @@ public class FastDecimalBenchmarkTest {
 
         // Run the benchmark
         Collection<RunResult> results = new Runner(options).run();
-        
+
         // Verify that we got results
         assertFalse(results.isEmpty(), "Benchmark should produce results");
-        
+
         // Print the results for debugging
         System.out.println("[DEBUG_LOG] Benchmark test results:");
         results.forEach(result -> {
@@ -49,12 +49,12 @@ public class FastDecimalBenchmarkTest {
             double score = result.getPrimaryResult().getScore();
             System.out.println("[DEBUG_LOG] " + benchmark + ": " + score + " ns/op");
         });
-        
+
         // Verify that FastDecimal is included in the results
         boolean hasFastDecimalResult = results.stream()
                 .anyMatch(r -> r.getPrimaryResult().getLabel().contains("FastDecimal"));
         assertTrue(hasFastDecimalResult, "Results should include FastDecimal benchmark");
-        
+
         // Verify that BigDecimal is included in the results
         boolean hasBigDecimalResult = results.stream()
                 .anyMatch(r -> r.getPrimaryResult().getLabel().contains("BigDecimal"));

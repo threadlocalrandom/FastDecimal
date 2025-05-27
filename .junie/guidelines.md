@@ -5,7 +5,8 @@ This document provides essential information for developers working on the FastD
 ## Build/Configuration Instructions
 
 ### Prerequisites
-- Java 21 or higher
+
+- Java 24 or higher
 - Maven 3.8 or higher
 
 ### Building the Project

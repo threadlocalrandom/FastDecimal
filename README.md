@@ -23,22 +23,44 @@ The benchmarks measure the performance of:
 
 ### Prerequisites
 
-- Java 21 or higher
+- Java 24 or higher
 - Maven 3.8 or higher
 
 ### Running from Maven
 
-To run the benchmarks using Maven:
+There are two ways to run the benchmarks using Maven:
+
+#### Method 1: Using the benchmark profile
+
+```bash
+# Run all benchmarks
+mvn test -P benchmark
+
+# Run specific benchmarks (e.g., only FastDecimalBenchmark)
+mvn test -P benchmark -Dbenchmark.includes=FastDecimalBenchmark
+
+# Run benchmarks matching a pattern (e.g., only addition benchmarks)
+mvn test -P benchmark -Dbenchmark.includes=".*add.*"
+```
+
+#### Method 2: Using the packaged JAR
 
 ```bash
 # Build the project
 mvn clean package
 
-# Run the basic benchmarks
-java -cp target/fast-decimal-1.0-SNAPSHOT.jar:target/test-classes org.tlr.fastdecimal.FastDecimalBenchmark
+# Run all benchmarks
+java -jar target/benchmarks.jar
 
-# Run the comprehensive benchmarks
-java -cp target/fast-decimal-1.0-SNAPSHOT.jar:target/test-classes org.tlr.fastdecimal.ComprehensiveBenchmark
+# Run specific benchmarks
+java -jar target/benchmarks.jar FastDecimalBenchmark
+java -jar target/benchmarks.jar ".*add.*"
+
+# Run the basic benchmarks directly
+java -cp target/fast-decimal-parent-1.0-SNAPSHOT.jar:target/test-classes org.tlr.fastdecimal.FastDecimalBenchmark
+
+# Run the comprehensive benchmarks directly
+java -cp target/fast-decimal-parent-1.0-SNAPSHOT.jar:target/test-classes org.tlr.fastdecimal.ComprehensiveBenchmark
 ```
 
 ### Running from IDE
