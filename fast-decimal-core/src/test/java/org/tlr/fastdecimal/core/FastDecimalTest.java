@@ -183,7 +183,7 @@ class FastDecimalTest {
             assertEquals(1L, value.longValue());
             assertEquals(1.23d, value.doubleValue(), 0.000001);
             assertEquals("1.23", value.toString());
-            assertEquals(12300L, value.getRawValue());
+            assertEquals(12300L, value.getScaledValue());
         }
     }
 

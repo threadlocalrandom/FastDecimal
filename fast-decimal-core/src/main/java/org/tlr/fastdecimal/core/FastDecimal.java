@@ -43,6 +43,11 @@ public class FastDecimal implements Comparable<FastDecimal> {
      */
     private final State state;
 
+    /**
+     * Cache for the string representation of this decimal number
+     */
+    private String stringCache;
+
     private FastDecimal(long scaledValue) {
         this.scaledValue = scaledValue;
         this.state = State.FINITE;
@@ -93,26 +98,49 @@ public class FastDecimal implements Comparable<FastDecimal> {
 
     @Override
     public String toString() {
+        // Return cached value if available
+        if (stringCache != null) {
+            return stringCache;
+        }
+
         long abs = Math.abs(scaledValue);
         long wholePart = abs / SCALE_FACTOR;
         long decimalPart = abs % SCALE_FACTOR;
 
-        StringBuilder result = new StringBuilder();
+        // Fast path for zero decimal part
+        if (decimalPart == 0) {
+            stringCache = scaledValue < 0 ? "-" + wholePart : Long.toString(wholePart);
+            return stringCache;
+        }
+
+        // Optimize for common case
+        StringBuilder result = new StringBuilder(16); // Pre-allocate reasonable size
         if (scaledValue < 0) {
             result.append('-');
         }
         result.append(wholePart);
-        if (decimalPart > 0) {
-            result.append('.');
-            String decimal = String.format("%04d", decimalPart);
-            // Remove trailing zeros
-            int lastNonZero = decimal.length() - 1;
-            while (lastNonZero >= 0 && decimal.charAt(lastNonZero) == '0') {
-                lastNonZero--;
-            }
-            result.append(decimal, 0, lastNonZero + 1);
+        result.append('.');
+
+        // Manually format decimal part with leading zeros
+        // This is much faster than String.format
+        char[] decimalChars = new char[SCALE_DIGITS];
+        for (int i = SCALE_DIGITS - 1; i >= 0; i--) {
+            decimalChars[i] = (char) ('0' + (decimalPart % 10));
+            decimalPart /= 10;
         }
-        return result.toString();
+
+        // Find last non-zero digit to remove trailing zeros
+        int lastNonZero = SCALE_DIGITS - 1;
+        while (lastNonZero >= 0 && decimalChars[lastNonZero] == '0') {
+            lastNonZero--;
+        }
+
+        // Append decimal digits without trailing zeros
+        result.append(decimalChars, 0, lastNonZero + 1);
+
+        // Cache and return the result
+        stringCache = result.toString();
+        return stringCache;
     }
 
     /**
@@ -300,12 +328,22 @@ public class FastDecimal implements Comparable<FastDecimal> {
     }
 
     /**
-     * Returns the raw scaled value used for internal representation.
+     * Returns the scaled value used for internal representation.
      *
      * @return the internal scaled value
      */
-    public long getRawValue() {
+    public long getScaledValue() {
         return scaledValue;
+    }
+
+    /**
+     * Creates a FastDecimal from a scaled value.
+     *
+     * @param scaledValue the scaled value (internal representation)
+     * @return a new FastDecimal with the given scaled value
+     */
+    public static FastDecimal fromScaledValue(long scaledValue) {
+        return new FastDecimal(scaledValue);
     }
 
     // Existing methods that don't use BigDecimal can remain unchanged:

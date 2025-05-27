@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>org.tlr</groupId>
+        <artifactId>fast-decimal-parent</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>fast-decimal-vector</artifactId>
+    <name>Fast Decimal Vector</name>
+    <description>Vector implementation for the FastDecimal library</description>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.tlr</groupId>
+            <artifactId>fast-decimal-core</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <!-- Test dependencies are inherited from parent -->
+    </dependencies>
+
+    <build>
+        <plugins>
+            <!-- Configure compiler to enable Vector API -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <compilerArgs>
+                        <arg>--add-modules=jdk.incubator.vector</arg>
+                        <arg>--enable-preview</arg>
+                    </compilerArgs>
+                    <annotationProcessorPaths combine.children="append">
+                        <path>
+                            <groupId>org.openjdk.jmh</groupId>
+                            <artifactId>jmh-generator-annprocess</artifactId>
+                            <version>${jmh-generator.version}</version>
+                        </path>
+                    </annotationProcessorPaths>
+                </configuration>
+            </plugin>
+
+            <!-- Configure Surefire to enable Vector API for tests -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <argLine>--add-modules=jdk.incubator.vector --enable-preview</argLine>
+                </configuration>
+            </plugin>
+            <!-- Other plugins are inherited from parent -->
+        </plugins>
+    </build>
+</project>

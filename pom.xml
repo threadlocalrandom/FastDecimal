@@ -11,6 +11,7 @@
 
     <modules>
         <module>fast-decimal-core</module>
+        <module>fast-decimal-vector</module>
     </modules>
 
     <properties>
@@ -20,7 +21,7 @@
         <!-- Dependency Versions -->
         <junit-jupiter.version>5.10.0</junit-jupiter.version>
         <jmh-core.version>1.37</jmh-core.version>
-        <jmh-generator.version>1.36</jmh-generator.version>
+        <jmh-generator.version>1.37</jmh-generator.version>
 
         <!-- Plugin Versions -->
         <maven-surefire-plugin.version>3.1.2</maven-surefire-plugin.version>
@@ -30,7 +31,7 @@
         <exec-maven-plugin.version>3.1.0</exec-maven-plugin.version>
 
         <!-- Benchmark Properties -->
-        <benchmark.includes>.*</benchmark.includes>
+        <benchmark.includes>.*Benchmark.*</benchmark.includes>
     </properties>
 
     <dependencies>
@@ -117,9 +118,9 @@
 
     benchmark profile: Used to run JMH benchmarks
     Usage: 
-      - Run all benchmarks: mvn test -P benchmark
-      - Run specific benchmarks: mvn test -P benchmark -Dbenchmark.includes=FastDecimalBenchmark
-      - Run with specific parameters: mvn test -P benchmark -Dbenchmark.includes=".*add.*"
+      - Run benchmarks in a specific module: cd module-name && mvn test -P benchmark
+      - Run specific benchmarks: cd module-name && mvn test -P benchmark -Dbenchmark.includes="FastDecimalBenchmark"
+      - Run specific methods: cd module-name && mvn test -P benchmark -Dbenchmark.includes=".*add.*"
     -->
     <profiles>
         <profile>
@@ -144,6 +145,12 @@
                                         <argument>-classpath</argument>
                                         <classpath/>
                                         <argument>org.openjdk.jmh.Main</argument>
+                                        <argument>-i</argument>
+                                        <argument>3</argument>
+                                        <argument>-wi</argument>
+                                        <argument>3</argument>
+                                        <argument>-f</argument>
+                                        <argument>1</argument>
                                         <argument>${benchmark.includes}</argument>
                                     </arguments>
                                 </configuration>
