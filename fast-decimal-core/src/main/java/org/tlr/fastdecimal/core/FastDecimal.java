@@ -1,4 +1,4 @@
-package org.tlr.fastdecimal;
+package org.tlr.fastdecimal.core;
 
 import java.math.RoundingMode;
 
@@ -14,7 +14,9 @@ public class FastDecimal implements Comparable<FastDecimal> {
 
     public static final FastDecimal TEN = new FastDecimal(100_000);
 
-    /** The scale factor used for internal representation */
+    /**
+     * The scale factor used for internal representation
+     */
     private static final int SCALE_FACTOR = 10_000;
     private static final int SCALE_DIGITS = 4;
 
@@ -22,17 +24,23 @@ public class FastDecimal implements Comparable<FastDecimal> {
     private static final long MIN_REPRESENTABLE_VALUE = Long.MIN_VALUE / SCALE_FACTOR;
 
 
-    /** Internal state of the decimal number */
+    /**
+     * Internal state of the decimal number
+     */
     private enum State {
         FINITE,
         INFINITE,
         UNKNOWN
     }
 
-    /** The internal scaled value */
+    /**
+     * The internal scaled value
+     */
     private final long scaledValue;
 
-    /** The state of this decimal number */
+    /**
+     * The state of this decimal number
+     */
     private final State state;
 
     private FastDecimal(long scaledValue) {
@@ -42,6 +50,7 @@ public class FastDecimal implements Comparable<FastDecimal> {
 
     /**
      * Creates a FastDecimal from a string representation.
+     *
      * @param value the string representation of the number
      * @return a new FastDecimal instance
      * @throws NumberFormatException if the string cannot be parsed
@@ -71,6 +80,7 @@ public class FastDecimal implements Comparable<FastDecimal> {
             throw new NumberFormatException("Invalid number format: " + value);
         }
     }
+
     /**
      * Returns this FastDecimal as a long, discarding any fractional part.
      * This conversion is done by dividing the scaled value by the scale factor.
@@ -114,7 +124,7 @@ public class FastDecimal implements Comparable<FastDecimal> {
      *
      * @param other the FastDecimal to compare with
      * @return a negative integer, zero, or a positive integer as this FastDecimal
-     *         is less than, equal to, or greater than the specified FastDecimal
+     * is less than, equal to, or greater than the specified FastDecimal
      * @throws NullPointerException if the specified FastDecimal is null
      */
     @Override
@@ -131,6 +141,7 @@ public class FastDecimal implements Comparable<FastDecimal> {
         // Compare scaled values directly since they're normalized to the same scale
         return Long.compare(this.scaledValue, other.scaledValue);
     }
+
     /**
      * Indicates whether this FastDecimal is equal to another object.
      * Two FastDecimals are considered equal if they have the same scaled value.
@@ -209,6 +220,7 @@ public class FastDecimal implements Comparable<FastDecimal> {
 
     /**
      * Adds another FastDecimal to this one.
+     *
      * @param other the FastDecimal to add
      * @return a new FastDecimal representing the sum
      */
@@ -218,6 +230,7 @@ public class FastDecimal implements Comparable<FastDecimal> {
 
     /**
      * Subtracts another FastDecimal from this one.
+     *
      * @param other the FastDecimal to subtract
      * @return a new FastDecimal representing the difference
      */
