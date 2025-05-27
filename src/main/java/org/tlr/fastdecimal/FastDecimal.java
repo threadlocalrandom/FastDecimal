@@ -7,9 +7,19 @@ import java.math.RoundingMode;
  * scaled by 10,000 for internal representation.
  */
 public class FastDecimal implements Comparable<FastDecimal> {
+
+    public static final FastDecimal ZERO = new FastDecimal(0);
+
+    public static final FastDecimal ONE = new FastDecimal(10_000);
+
+    public static final FastDecimal TEN = new FastDecimal(100_000);
+
     /** The scale factor used for internal representation */
     private static final int SCALE_FACTOR = 10_000;
     private static final int SCALE_DIGITS = 4;
+
+    private static final long MAX_REPRESENTABLE_VALUE = Long.MAX_VALUE / SCALE_FACTOR;
+    private static final long MIN_REPRESENTABLE_VALUE = Long.MIN_VALUE / SCALE_FACTOR;
 
 
     /** Internal state of the decimal number */
@@ -276,6 +286,15 @@ public class FastDecimal implements Comparable<FastDecimal> {
         return (double) scaledValue / SCALE_FACTOR;
     }
 
+    /**
+     * Returns the raw scaled value used for internal representation.
+     *
+     * @return the internal scaled value
+     */
+    public long getRawValue() {
+        return scaledValue;
+    }
+
     // Existing methods that don't use BigDecimal can remain unchanged:
     // add, subtract, abs, negate, isZero, isPositive, isNegative,
     // compareTo, max, min, hasDecimalPart, longValue, decimalPart,
@@ -307,9 +326,7 @@ public class FastDecimal implements Comparable<FastDecimal> {
             throw new ArithmeticException("Cannot represent NaN or Infinite values");
         }
 
-        if (value > Long.MAX_VALUE / SCALE_FACTOR || value < Long.MIN_VALUE / SCALE_FACTOR) {
-            throw new ArithmeticException("Value exceeds the representable range");
-        }
+        validateValueInRange(value);
 
         long wholePart = (long) value;
         double decimal = value - wholePart;
@@ -320,18 +337,18 @@ public class FastDecimal implements Comparable<FastDecimal> {
         return new FastDecimal(scaledWhole + scaledDecimal);
     }
 
-    // Constants can be defined directly with scaled values
-    public static FastDecimal ZERO() {
-        return new FastDecimal(0);
+    /**
+     * Validates that the given value is within the representable range for FastDecimal.
+     *
+     * @param value the value to validate
+     * @throws ArithmeticException if the value exceeds the representable range
+     */
+    private static void validateValueInRange(double value) {
+        if (value > MAX_REPRESENTABLE_VALUE || value < MIN_REPRESENTABLE_VALUE) {
+            throw new ArithmeticException("Value exceeds the representable range");
+        }
     }
 
-    public static FastDecimal ONE() {
-        return new FastDecimal(SCALE_FACTOR);
-    }
-
-    public static FastDecimal TEN() {
-        return new FastDecimal(10 * SCALE_FACTOR);
-    }
 
     /**
      * Returns whether this FastDecimal is strictly positive (greater than zero).
