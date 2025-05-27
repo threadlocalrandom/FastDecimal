@@ -3,6 +3,8 @@ package org.tlr.fastdecimal.vector;
 import org.junit.jupiter.api.Test;
 import org.tlr.fastdecimal.core.FastDecimal;
 
+import java.util.Arrays;
+
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -93,9 +95,7 @@ public class VectorFastDecimalTest {
         // Create test arrays
         FastDecimal[] a = createTestArray(10);
         FastDecimal[] b = new FastDecimal[10];
-        for (int i = 0; i < b.length; i++) {
-            b[i] = FastDecimal.ZERO;
-        }
+        Arrays.fill(b, FastDecimal.ZERO);
 
         // Verify that division by zero throws an exception
         assertThrows(ArithmeticException.class, () -> VectorFastDecimal.divide(a, b),
