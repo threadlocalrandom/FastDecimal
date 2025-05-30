@@ -18,6 +18,8 @@
         <!-- Test dependencies are inherited from parent -->
     </dependencies>
 
+    <!-- Since we can't add JQwik dependency directly, we'll create a JUnit-based test that simulates property testing -->
+
     <build>
         <plugins>
             <!-- Plugins are inherited from parent -->

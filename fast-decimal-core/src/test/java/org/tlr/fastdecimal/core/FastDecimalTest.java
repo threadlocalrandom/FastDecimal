@@ -8,6 +8,8 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -20,6 +22,7 @@ class FastDecimalTest {
         @Test
         @DisplayName("Create from valid strings")
         void testCreateFromValidStrings() {
+            assertEquals("1.2345", FastDecimal.of("1.23456678").toString());
             assertEquals("1.23", FastDecimal.of("1.23").toString());
             assertEquals("0", FastDecimal.of("0").toString());
             assertEquals("-1.23", FastDecimal.of("-1.23").toString());
@@ -87,8 +90,14 @@ class FastDecimalTest {
         @Test
         @DisplayName("Division")
         void testDivision() {
-            FastDecimal a = FastDecimal.of("7.5");
+            FastDecimal a = FastDecimal.of("7.50003");
             FastDecimal b = FastDecimal.of("2.5");
+            FastDecimal c = FastDecimal.of("3.0000");
+            FastDecimal d = FastDecimal.of("0.123456789");
+            BigDecimal bc = new BigDecimal("3.0000").setScale(4, RoundingMode.HALF_UP);
+            BigDecimal bd = BigDecimal.valueOf(0.123456789);
+            var bs = bc.divide(bd, RoundingMode.HALF_UP);
+            assertEquals(bs.toString(), c.divide(d).toString());
             assertEquals("3", a.divide(b).toString());
             assertThrows(ArithmeticException.class, () -> a.divide(FastDecimal.ZERO));
         }
