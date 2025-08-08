@@ -4,6 +4,8 @@ import jdk.incubator.vector.LongVector;
 import jdk.incubator.vector.VectorSpecies;
 import org.tlr.fastdecimal.core.FastDecimal;
 
+import java.util.stream.IntStream;
+
 /**
  * Vector implementation of FastDecimal operations using the Java Vector API.
  * This class provides methods for performing operations on arrays of FastDecimal values
@@ -13,6 +15,9 @@ public class VectorFastDecimal {
 
     // The species (vector size and element type) to use for long operations
     private static final VectorSpecies<Long> SPECIES = LongVector.SPECIES_PREFERRED;
+
+    // Threshold under which parallel execution is not beneficial
+    private static final int PARALLEL_THRESHOLD = 16 * SPECIES.length();
 
     /**
      * Adds two arrays of FastDecimal values element-wise and stores the result in a new array.
@@ -105,6 +110,79 @@ public class VectorFastDecimal {
 
         // Convert back to FastDecimal objects
         return createFastDecimals(resultValues);
+    }
+
+    /**
+     * Adds two arrays using all available CPU cores. The computation within each chunk
+     * remains vectorized via the Vector API. Falls back to single-threaded for small arrays.
+     */
+    public static FastDecimal[] addParallel(FastDecimal[] a, FastDecimal[] b) {
+        if (a.length != b.length) {
+            throw new IllegalArgumentException("Arrays must have the same length");
+        }
+        if (a.length < PARALLEL_THRESHOLD) {
+            return add(a, b);
+        }
+        long[] av = extractScaledValues(a);
+        long[] bv = extractScaledValues(b);
+        long[] out = new long[a.length];
+        parallelForRanges(a.length, (start, end) -> vectorAddRange(av, bv, out, start, end));
+        return createFastDecimals(out);
+    }
+
+    /**
+     * Subtracts two arrays using all available CPU cores. Vectorized inside chunks.
+     */
+    public static FastDecimal[] subtractParallel(FastDecimal[] a, FastDecimal[] b) {
+        if (a.length != b.length) {
+            throw new IllegalArgumentException("Arrays must have the same length");
+        }
+        if (a.length < PARALLEL_THRESHOLD) {
+            return subtract(a, b);
+        }
+        long[] av = extractScaledValues(a);
+        long[] bv = extractScaledValues(b);
+        long[] out = new long[a.length];
+        parallelForRanges(a.length, (start, end) -> vectorSubRange(av, bv, out, start, end));
+        return createFastDecimals(out);
+    }
+
+    /**
+     * Multiplies two arrays using all available CPU cores. Vectorized inside chunks.
+     */
+    public static FastDecimal[] multiplyParallel(FastDecimal[] a, FastDecimal[] b) {
+        if (a.length != b.length) {
+            throw new IllegalArgumentException("Arrays must have the same length");
+        }
+        if (a.length < PARALLEL_THRESHOLD) {
+            return multiply(a, b);
+        }
+        long[] av = extractScaledValues(a);
+        long[] bv = extractScaledValues(b);
+        long[] out = new long[a.length];
+        parallelForRanges(a.length, (start, end) -> vectorMulRange(av, bv, out, start, end));
+        return createFastDecimals(out);
+    }
+
+    /**
+     * Divides two arrays using all available CPU cores with HALF_UP rounding.
+     */
+    public static FastDecimal[] divideParallel(FastDecimal[] a, FastDecimal[] b) {
+        if (a.length != b.length) {
+            throw new IllegalArgumentException("Arrays must have the same length");
+        }
+        if (a.length < PARALLEL_THRESHOLD) {
+            return divide(a, b);
+        }
+        long[] av = extractScaledValues(a);
+        long[] bv = extractScaledValues(b);
+        // check division by zero first
+        for (long v : bv) {
+            if (v == 0) throw new ArithmeticException("Division by zero");
+        }
+        long[] out = new long[a.length];
+        parallelForRanges(a.length, (start, end) -> divideRange(av, bv, out, start, end));
+        return createFastDecimals(out);
     }
 
     /**
@@ -271,5 +349,85 @@ public class VectorFastDecimal {
         }
 
         return result;
+    }
+
+    // ===== Parallel helpers =====
+
+    @FunctionalInterface
+    private interface RangeTask {
+        void apply(int startInclusive, int endExclusive);
+    }
+
+    private static void parallelForRanges(int length, RangeTask task) {
+        int cores = Math.max(1, Runtime.getRuntime().availableProcessors());
+        // cap tasks to avoid too small chunks
+        int tasks = Math.min(cores, Math.max(1, length / (4 * SPECIES.length())));
+        if (tasks <= 1) {
+            task.apply(0, length);
+            return;
+        }
+        int base = length / tasks;
+        int rem = length % tasks;
+        IntStream.range(0, tasks).parallel().forEach(t -> {
+            int start = t * base + Math.min(t, rem);
+            int end = start + base + (t < rem ? 1 : 0);
+            if (start < end) {
+                task.apply(start, end);
+            }
+        });
+    }
+
+    private static void vectorAddRange(long[] a, long[] b, long[] out, int start, int end) {
+        int i = start;
+        int upper = end - ((end - start) % SPECIES.length());
+        for (; i < upper; i += SPECIES.length()) {
+            LongVector va = LongVector.fromArray(SPECIES, a, i);
+            LongVector vb = LongVector.fromArray(SPECIES, b, i);
+            va.add(vb).intoArray(out, i);
+        }
+        for (; i < end; i++) {
+            out[i] = a[i] + b[i];
+        }
+    }
+
+    private static void vectorSubRange(long[] a, long[] b, long[] out, int start, int end) {
+        int i = start;
+        int upper = end - ((end - start) % SPECIES.length());
+        for (; i < upper; i += SPECIES.length()) {
+            LongVector va = LongVector.fromArray(SPECIES, a, i);
+            LongVector vb = LongVector.fromArray(SPECIES, b, i);
+            va.sub(vb).intoArray(out, i);
+        }
+        for (; i < end; i++) {
+            out[i] = a[i] - b[i];
+        }
+    }
+
+    private static void vectorMulRange(long[] a, long[] b, long[] out, int start, int end) {
+        int i = start;
+        int upper = end - ((end - start) % SPECIES.length());
+        for (; i < upper; i += SPECIES.length()) {
+            LongVector va = LongVector.fromArray(SPECIES, a, i);
+            LongVector vb = LongVector.fromArray(SPECIES, b, i);
+            va.mul(vb).div(10_000L).intoArray(out, i);
+        }
+        for (; i < end; i++) {
+            out[i] = (a[i] * b[i]) / 10_000L;
+        }
+    }
+
+    private static void divideRange(long[] a, long[] b, long[] out, int start, int end) {
+        for (int i = start; i < end; i++) {
+            long dividend = a[i] * 10_000L;
+            long divisor = b[i];
+            long quotient = dividend / divisor;
+            long remainder = dividend % divisor;
+            long halfDivisor = Math.abs(divisor) / 2;
+            if (Math.abs(remainder) >= halfDivisor) {
+                out[i] = quotient + (a[i] >= 0 ? 1 : -1);
+            } else {
+                out[i] = quotient;
+            }
+        }
     }
 }
