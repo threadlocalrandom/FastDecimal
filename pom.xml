@@ -146,12 +146,9 @@
                                     <classpathScope>test</classpathScope>
                                     <executable>java</executable>
                                     <arguments>
-<<<<<<< Updated upstream
-                                        <argument>--enable-native-access=ALL-UNNAMED</argument>
-=======
                                         <argument>--add-modules=jdk.incubator.vector</argument>
                                         <argument>--enable-preview</argument>
->>>>>>> Stashed changes
+                                        <argument>--enable-native-access=ALL-UNNAMED</argument>
                                         <argument>-classpath</argument>
                                         <classpath/>
                                         <argument>org.openjdk.jmh.Main</argument>
