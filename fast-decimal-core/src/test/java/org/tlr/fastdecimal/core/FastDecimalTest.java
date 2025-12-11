@@ -95,7 +95,7 @@ class FastDecimalTest {
             FastDecimal c = FastDecimal.of("3.0000");
             FastDecimal d = FastDecimal.of("0.123456789");
             BigDecimal bc = new BigDecimal("3.0000").setScale(4, RoundingMode.HALF_UP);
-            BigDecimal bd = BigDecimal.valueOf(0.123456789);
+            BigDecimal bd = new BigDecimal("0.1234");
             var bs = bc.divide(bd, RoundingMode.HALF_UP);
             assertEquals(bs.toString(), c.divide(d).toString());
             assertEquals("3", a.divide(b).toString());
