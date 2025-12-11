@@ -1,5 +1,6 @@
 package org.tlr.fastdecimal.core;
 
+import java.math.BigDecimal;
 import java.math.RoundingMode;
 
 /**
@@ -51,6 +52,30 @@ public class FastDecimal implements Comparable<FastDecimal> {
     private FastDecimal(long scaledValue) {
         this.scaledValue = scaledValue;
         this.state = State.FINITE;
+    }
+
+    /**
+     * Creates a FastDecimal from a BigDecimal value.
+     * The value is rounded to 4 fractional digits using HALF_UP to match the internal scale.
+     *
+     * @param value BigDecimal value (non-null)
+     * @throws NullPointerException if value is null
+     * @throws ArithmeticException if the scaled value doesn't fit into a 64-bit signed integer
+     */
+    public FastDecimal(BigDecimal value) {
+        this(scaleFromBigDecimal(value));
+    }
+
+    private static long scaleFromBigDecimal(BigDecimal value) {
+        if (value == null) {
+            throw new NullPointerException("BigDecimal value cannot be null");
+        }
+        // Normalize to 4 decimal places with HALF_UP rounding, then convert to scaled long
+        BigDecimal scaled = value.setScale(SCALE_DIGITS, RoundingMode.HALF_UP);
+        // Move decimal point to the right by SCALE_DIGITS so the result is an integer
+        BigDecimal shifted = scaled.movePointRight(SCALE_DIGITS);
+        // Use longValueExact to detect overflow
+        return shifted.longValueExact();
     }
 
     /**
@@ -344,6 +369,14 @@ public class FastDecimal implements Comparable<FastDecimal> {
      */
     public static FastDecimal fromScaledValue(long scaledValue) {
         return new FastDecimal(scaledValue);
+    }
+
+    /**
+     * Factory method to create a FastDecimal from BigDecimal.
+     * Equivalent to calling the BigDecimal constructor.
+     */
+    public static FastDecimal of(BigDecimal value) {
+        return new FastDecimal(value);
     }
 
     // Existing methods that don't use BigDecimal can remain unchanged:

@@ -1,5 +1,13 @@
 # FastDecimal Project Guidelines
 
+About this file
+- Purpose: This document centralizes build, test, and development guidelines for the FastDecimal project so contributors have a single source of setup and workflow truth.
+- Who uses it: Human contributors and the Junie assistant. Junie reads this file to align its actions (build, test, code changes) with the project’s conventions.
+- Where it lives: .junie/guidelines.md. It is documentation only and is not shipped in artifacts nor used at runtime.
+- Maintenance: Keep this file up to date when build requirements, test practices, or API/implementation details change. Update it in the same PR as those changes.
+- Source of truth: If anything here conflicts with code or tests, consider code/tests authoritative and then update this file to match.
+- Impact on code: None. Editing this file does not affect compilation, packaging, or performance.
+
 This document provides essential information for developers working on the FastDecimal project.
 
 ## Build/Configuration Instructions
