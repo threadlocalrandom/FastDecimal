@@ -186,13 +186,17 @@ class FastDecimalTest {
     @DisplayName("Conversion tests")
     class ConversionTests {
         @Test
-        @DisplayName("Test conversion to primitive types")
+        @DisplayName("Test conversion to primitive types and BigDecimal")
         void testConversionToPrimitives() {
             FastDecimal value = FastDecimal.of("1.23");
             assertEquals(1L, value.longValue());
             assertEquals(1.23d, value.doubleValue(), 0.000001);
             assertEquals("1.23", value.toString());
             assertEquals(12300L, value.getScaledValue());
+            assertEquals(new BigDecimal("1.23"), value.toBigDecimal());
+            assertEquals(new BigDecimal("1.2300"), value.toBigDecimal(4));
+            assertEquals(new BigDecimal("1.2"), value.toBigDecimal(1));
+            assertEquals(new BigDecimal("1"), value.toBigDecimal(0));
         }
     }
 

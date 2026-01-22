@@ -2,7 +2,6 @@ package org.tlr.fastdecimal.core;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.math.BigDecimal;
 
 /**
  * A high-performance decimal number implementation that uses a long value
@@ -24,61 +23,21 @@ public class FastDecimal implements Comparable<FastDecimal> {
 
     private static final long MAX_REPRESENTABLE_VALUE = Long.MAX_VALUE / SCALE_FACTOR;
     private static final long MIN_REPRESENTABLE_VALUE = Long.MIN_VALUE / SCALE_FACTOR;
-
-
-    /**
-     * Internal state of the decimal number
-     */
-    private enum State {
-        FINITE,
-        INFINITE,
-        UNKNOWN
-    }
+    private static final int DEFAULT_BD_SCALE = 2;
 
     /**
      * The internal scaled value
      */
     private final long scaledValue;
 
-    /**
-     * The state of this decimal number
-     */
-    private final State state;
 
     /**
      * Cache for the string representation of this decimal number
      */
     private String stringCache;
 
-    /**
-     * Original input string if constructed from a String (may carry more precision)
-     */
-    private final String originalInput;
-
-    /**
-     * Optional display scale hint for rendering with fixed decimals (e.g., 4)
-     */
-    private final Integer displayScale;
-
     private FastDecimal(long scaledValue) {
         this.scaledValue = scaledValue;
-        this.state = State.FINITE;
-        this.originalInput = null;
-        this.displayScale = null;
-    }
-
-    private FastDecimal(long scaledValue, String originalInput) {
-        this.scaledValue = scaledValue;
-        this.state = State.FINITE;
-        this.originalInput = originalInput;
-        this.displayScale = null;
-    }
-
-    private FastDecimal(long scaledValue, String originalInput, Integer displayScale) {
-        this.scaledValue = scaledValue;
-        this.state = State.FINITE;
-        this.originalInput = originalInput;
-        this.displayScale = displayScale;
     }
 
     /**
@@ -120,13 +79,11 @@ public class FastDecimal implements Comparable<FastDecimal> {
         String wholePart = decimalPoint == -1 ? absValue : absValue.substring(0, decimalPoint);
         StringBuilder decimalPart = new StringBuilder(decimalPoint == -1 ? "0" : absValue.substring(decimalPoint + 1));
 
-        // Pad or truncate decimal part to match scale (truncate extra digits)
+        // Pad or truncate decimal part to match scale
         if (decimalPart.length() > SCALE_DIGITS) {
             decimalPart = new StringBuilder(decimalPart.substring(0, SCALE_DIGITS));
-        } else {
-            while (decimalPart.length() < SCALE_DIGITS) {
-                decimalPart.append("0");
-            }
+        } else while (decimalPart.length() < SCALE_DIGITS) {
+            decimalPart.append("0");
         }
 
         try {
@@ -134,7 +91,7 @@ public class FastDecimal implements Comparable<FastDecimal> {
             long decimal = Long.parseLong(decimalPart.toString());
             long result = whole + decimal;
 
-            return new FastDecimal(isNegative ? -result : result, value);
+            return new FastDecimal(isNegative ? -result : result);
         } catch (NumberFormatException e) {
             throw new NumberFormatException("Invalid number format: " + value);
         }
@@ -163,16 +120,7 @@ public class FastDecimal implements Comparable<FastDecimal> {
 
         // Fast path for zero decimal part
         if (decimalPart == 0) {
-            // If a fixed display scale is requested, render with that many zeros
-            if (displayScale != null && displayScale > 0) {
-                StringBuilder sb = new StringBuilder();
-                if (scaledValue < 0) sb.append('-');
-                sb.append(wholePart).append('.');
-                for (int i = 0; i < displayScale; i++) sb.append('0');
-                stringCache = sb.toString();
-            } else {
-                stringCache = scaledValue < 0 ? "-" + wholePart : Long.toString(wholePart);
-            }
+            stringCache = scaledValue < 0 ? "-" + wholePart : Long.toString(wholePart);
             return stringCache;
         }
 
@@ -186,25 +134,20 @@ public class FastDecimal implements Comparable<FastDecimal> {
 
         // Manually format decimal part with leading zeros
         // This is much faster than String.format
-        int effectiveScale = (displayScale != null && displayScale >= 0) ? displayScale : SCALE_DIGITS;
-        char[] decimalChars = new char[effectiveScale];
-        for (int i = effectiveScale - 1; i >= 0; i--) {
+        char[] decimalChars = new char[SCALE_DIGITS];
+        for (int i = SCALE_DIGITS - 1; i >= 0; i--) {
             decimalChars[i] = (char) ('0' + (decimalPart % 10));
             decimalPart /= 10;
         }
 
-        if (displayScale != null) {
-            // Fixed number of decimals, keep trailing zeros
-            result.append(decimalChars, 0, effectiveScale);
-        } else {
-            // Find last non-zero digit to remove trailing zeros
-            int lastNonZero = effectiveScale - 1;
-            while (lastNonZero >= 0 && decimalChars[lastNonZero] == '0') {
-                lastNonZero--;
-            }
-            // Append decimal digits without trailing zeros
-            result.append(decimalChars, 0, lastNonZero + 1);
+        // Find last non-zero digit to remove trailing zeros
+        int lastNonZero = SCALE_DIGITS - 1;
+        while (lastNonZero >= 0 && decimalChars[lastNonZero] == '0') {
+            lastNonZero--;
         }
+
+        // Append decimal digits without trailing zeros
+        result.append(decimalChars, 0, lastNonZero + 1);
 
         // Cache and return the result
         stringCache = result.toString();
@@ -347,44 +290,17 @@ public class FastDecimal implements Comparable<FastDecimal> {
 
         // Scale up the dividend to maintain precision
         long dividend = scaledValue * SCALE_FACTOR;
-        long divisor = other.scaledValue;
         long result;
 
-        // Special handling: if the divisor originated from a String with potentially higher precision,
-        // align behavior with BigDecimal by using it to compute a SCALE_DIGITS-rounded result.
-        if (roundingMode == RoundingMode.HALF_UP && other.originalInput != null) {
-            String oi = other.originalInput.startsWith("-") ? other.originalInput.substring(1) : other.originalInput;
-            int dp = oi.indexOf('.');
-            int fracLen = (dp >= 0) ? (oi.length() - dp - 1) : 0;
-            if (fracLen > SCALE_DIGITS) {
-                BigDecimal a = new BigDecimal(this.toString()).setScale(SCALE_DIGITS, RoundingMode.HALF_UP);
-                BigDecimal b = new BigDecimal(other.originalInput);
-                BigDecimal q = a.divide(b, SCALE_DIGITS, RoundingMode.HALF_UP);
-                // Build a result that preserves 4 decimal places in its string output
-                long scaled = q.movePointRight(SCALE_DIGITS).setScale(0, RoundingMode.HALF_UP).longValueExact();
-                return new FastDecimal(scaled, null, SCALE_DIGITS);
-            }
-        }
-
         switch (roundingMode) {
-            case FLOOR -> {
-                // Floor division (toward -infinity)
-                result = Math.floorDiv(dividend, divisor);
-            }
-            case CEILING -> {
-                // Ceiling division (toward +infinity)
-                result = -Math.floorDiv(-dividend, divisor);
-            }
+            case FLOOR -> result = dividend / other.scaledValue;
+            case CEILING -> result = (dividend + other.scaledValue - 1) / other.scaledValue;
             case HALF_UP -> {
-                // Truncate toward zero first
-                long quotient = dividend / divisor;
-                long remainder = dividend % divisor; // same sign as dividend
-                long absRemainder = Math.abs(remainder);
-                long absDivisor = Math.abs(divisor);
-                // If remainder is at least half of divisor, round away from zero
-                if (absRemainder * 2 >= absDivisor) {
-                    int sign = ((dividend ^ divisor) >= 0) ? 1 : -1; // sign of the true result
-                    result = quotient + sign;
+                long quotient = dividend / other.scaledValue;
+                long remainder = dividend % other.scaledValue;
+                long halfDivisor = Math.abs(other.scaledValue) / 2;
+                if (Math.abs(remainder) >= halfDivisor) {
+                    result = quotient + (scaledValue >= 0 ? 1 : -1);
                 } else {
                     result = quotient;
                 }
@@ -420,6 +336,27 @@ public class FastDecimal implements Comparable<FastDecimal> {
 
     public double doubleValue() {
         return (double) scaledValue / SCALE_FACTOR;
+    }
+
+    /**
+     * Returns this FastDecimal as a BigDecimal.
+     * The result is stripped of trailing zeros.
+     *
+     * @return a BigDecimal representation of this FastDecimal
+     */
+    public BigDecimal toBigDecimal() {
+        return toBigDecimal(DEFAULT_BD_SCALE);
+    }
+
+    /**
+     * Returns this FastDecimal as a BigDecimal with the specified scale.
+     * Uses HALF_UP rounding if necessary.
+     *
+     * @param scale scale of the BigDecimal value to be returned.
+     * @return a BigDecimal representation of this FastDecimal with the specified scale.
+     */
+    public BigDecimal toBigDecimal(int scale) {
+        return BigDecimal.valueOf(scaledValue, SCALE_DIGITS).setScale(scale, RoundingMode.HALF_UP);
     }
 
     /**
