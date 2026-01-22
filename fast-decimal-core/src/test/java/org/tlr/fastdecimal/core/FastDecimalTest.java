@@ -95,7 +95,7 @@ class FastDecimalTest {
             FastDecimal c = FastDecimal.of("3.0000");
             FastDecimal d = FastDecimal.of("0.123456789");
             BigDecimal bc = new BigDecimal("3.0000").setScale(4, RoundingMode.HALF_UP);
-            BigDecimal bd = BigDecimal.valueOf(0.123456789);
+            BigDecimal bd = new BigDecimal("0.1234");
             var bs = bc.divide(bd, RoundingMode.HALF_UP);
             assertEquals(bs.toString(), c.divide(d).toString());
             assertEquals("3", a.divide(b).toString());
@@ -186,13 +186,17 @@ class FastDecimalTest {
     @DisplayName("Conversion tests")
     class ConversionTests {
         @Test
-        @DisplayName("Test conversion to primitive types")
+        @DisplayName("Test conversion to primitive types and BigDecimal")
         void testConversionToPrimitives() {
             FastDecimal value = FastDecimal.of("1.23");
             assertEquals(1L, value.longValue());
             assertEquals(1.23d, value.doubleValue(), 0.000001);
             assertEquals("1.23", value.toString());
             assertEquals(12300L, value.getScaledValue());
+            assertEquals(new BigDecimal("1.23"), value.toBigDecimal());
+            assertEquals(new BigDecimal("1.2300"), value.toBigDecimal(4));
+            assertEquals(new BigDecimal("1.2"), value.toBigDecimal(1));
+            assertEquals(new BigDecimal("1"), value.toBigDecimal(0));
         }
     }
 
