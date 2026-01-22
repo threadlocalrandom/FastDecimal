@@ -14,6 +14,11 @@ To build the project, run:
 ```bash
 mvn clean install
 ```
+### Verifying the Project
+To build the project, run:
+```bash
+mvn clean verify
+```
 
 ### Project Structure
 - `src/main/java/org/tlr/fastdecimal/` - Main source code
