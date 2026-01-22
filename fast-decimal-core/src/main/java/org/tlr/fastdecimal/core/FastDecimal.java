@@ -298,9 +298,11 @@ public class FastDecimal implements Comparable<FastDecimal> {
             case HALF_UP -> {
                 long quotient = dividend / other.scaledValue;
                 long remainder = dividend % other.scaledValue;
-                long halfDivisor = Math.abs(other.scaledValue) / 2;
-                if (Math.abs(remainder) >= halfDivisor) {
-                    result = quotient + (scaledValue >= 0 ? 1 : -1);
+                long absRemainder = Math.abs(remainder);
+                long absDivisor = Math.abs(other.scaledValue);
+                if (absRemainder * 2 >= absDivisor) {
+                    int sign = ((dividend ^ other.scaledValue) >= 0) ? 1 : -1;
+                    result = quotient + sign;
                 } else {
                     result = quotient;
                 }

@@ -224,13 +224,11 @@ public class VectorFastDecimal {
             // Calculate quotient and remainder
             long divisor = bValues[i];
             long quotient = dividend / divisor;
-            long remainder = dividend % divisor; // same sign as dividend
-
-            // Apply HALF_UP rounding away from zero based on the true result sign
+            long remainder = dividend % divisor;
             long absRemainder = Math.abs(remainder);
             long absDivisor = Math.abs(divisor);
             if (absRemainder * 2 >= absDivisor) {
-                int sign = ((dividend ^ divisor) >= 0) ? 1 : -1; // sign of the true result
+                int sign = ((dividend ^ divisor) >= 0) ? 1 : -1;
                 resultValues[i] = quotient + sign;
             } else {
                 resultValues[i] = quotient;
@@ -425,9 +423,11 @@ public class VectorFastDecimal {
             long divisor = b[i];
             long quotient = dividend / divisor;
             long remainder = dividend % divisor;
-            long halfDivisor = Math.abs(divisor) / 2;
-            if (Math.abs(remainder) >= halfDivisor) {
-                out[i] = quotient + (a[i] >= 0 ? 1 : -1);
+            long absRemainder = Math.abs(remainder);
+            long absDivisor = Math.abs(divisor);
+            if (absRemainder * 2 >= absDivisor) {
+                int sign = ((dividend ^ divisor) >= 0) ? 1 : -1;
+                out[i] = quotient + sign;
             } else {
                 out[i] = quotient;
             }
