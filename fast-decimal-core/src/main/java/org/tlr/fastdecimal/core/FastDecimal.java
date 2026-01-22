@@ -23,26 +23,13 @@ public class FastDecimal implements Comparable<FastDecimal> {
 
     private static final long MAX_REPRESENTABLE_VALUE = Long.MAX_VALUE / SCALE_FACTOR;
     private static final long MIN_REPRESENTABLE_VALUE = Long.MIN_VALUE / SCALE_FACTOR;
-
-
-    /**
-     * Internal state of the decimal number
-     */
-    private enum State {
-        FINITE,
-        INFINITE,
-        UNKNOWN
-    }
+    private static final int DEFAULT_BD_SCALE = 2;
 
     /**
      * The internal scaled value
      */
     private final long scaledValue;
 
-    /**
-     * The state of this decimal number
-     */
-    private final State state;
 
     /**
      * Cache for the string representation of this decimal number
@@ -51,7 +38,6 @@ public class FastDecimal implements Comparable<FastDecimal> {
 
     private FastDecimal(long scaledValue) {
         this.scaledValue = scaledValue;
-        this.state = State.FINITE;
     }
 
     /**
@@ -350,6 +336,27 @@ public class FastDecimal implements Comparable<FastDecimal> {
 
     public double doubleValue() {
         return (double) scaledValue / SCALE_FACTOR;
+    }
+
+    /**
+     * Returns this FastDecimal as a BigDecimal.
+     * The result is stripped of trailing zeros.
+     *
+     * @return a BigDecimal representation of this FastDecimal
+     */
+    public BigDecimal toBigDecimal() {
+        return toBigDecimal(DEFAULT_BD_SCALE);
+    }
+
+    /**
+     * Returns this FastDecimal as a BigDecimal with the specified scale.
+     * Uses HALF_UP rounding if necessary.
+     *
+     * @param scale scale of the BigDecimal value to be returned.
+     * @return a BigDecimal representation of this FastDecimal with the specified scale.
+     */
+    public BigDecimal toBigDecimal(int scale) {
+        return BigDecimal.valueOf(scaledValue, SCALE_DIGITS).setScale(scale, RoundingMode.HALF_UP);
     }
 
     /**
