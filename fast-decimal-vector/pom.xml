@@ -34,13 +34,6 @@
                         <arg>--add-modules=jdk.incubator.vector</arg>
                         <arg>--enable-preview</arg>
                     </compilerArgs>
-                    <annotationProcessorPaths combine.children="append">
-                        <path>
-                            <groupId>org.openjdk.jmh</groupId>
-                            <artifactId>jmh-generator-annprocess</artifactId>
-                            <version>${jmh-generator.version}</version>
-                        </path>
-                    </annotationProcessorPaths>
                 </configuration>
             </plugin>
 

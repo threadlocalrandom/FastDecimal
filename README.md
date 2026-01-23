@@ -25,8 +25,6 @@ The benchmarks measure the performance of:
 
 - Java 25 or higher
 - Maven 3.8 or higher
-- For JCuda benchmarks: NVIDIA CUDA-capable GPU with compute capability 3.0 (Kepler) or newer and CUDA 11.8 drivers (
-  see [JCuda installation instructions](fast-decimal-jcuda/README.md#cuda-driver-installation))
 
 ### Running from Maven
 
@@ -36,13 +34,13 @@ There are two ways to run the benchmarks using Maven:
 
 ```bash
 # Run all benchmarks
-mvn test -P benchmark
+mvn test -P benchmark -pl fast-decimal-benchmarks
 
 # Run specific benchmarks (e.g., only FastDecimalBenchmark)
-mvn test -P benchmark -Dbenchmark.includes=FastDecimalBenchmark
+mvn test -P benchmark -pl fast-decimal-benchmarks -Dbenchmark.includes=FastDecimalBenchmark
 
 # Run benchmarks matching a pattern (e.g., only addition benchmarks)
-mvn test -P benchmark -Dbenchmark.includes=".*add.*"
+mvn test -P benchmark -pl fast-decimal-benchmarks -Dbenchmark.includes=".*add.*"
 ```
 
 #### Method 2: Using the packaged JAR
@@ -52,17 +50,17 @@ mvn test -P benchmark -Dbenchmark.includes=".*add.*"
 mvn clean package
 
 # Run all benchmarks
-java -jar target/benchmarks.jar
+java -jar fast-decimal-benchmarks/target/benchmarks.jar
 
 # Run specific benchmarks
-java -jar target/benchmarks.jar FastDecimalBenchmark
-java -jar target/benchmarks.jar ".*add.*"
+java -jar fast-decimal-benchmarks/target/benchmarks.jar FastDecimalBenchmark
+java -jar fast-decimal-benchmarks/target/benchmarks.jar ".*add.*"
 
 # Run the basic benchmarks directly
-java -cp target/fast-decimal-parent-1.0-SNAPSHOT.jar:target/test-classes org.tlr.fastdecimal.FastDecimalBenchmark
+java -cp fast-decimal-benchmarks/target/benchmarks.jar org.tlr.fastdecimal.core.FastDecimalBenchmark
 
 # Run the comprehensive benchmarks directly
-java -cp target/fast-decimal-parent-1.0-SNAPSHOT.jar:target/test-classes org.tlr.fastdecimal.ComprehensiveBenchmark
+java -cp fast-decimal-benchmarks/target/benchmarks.jar org.tlr.fastdecimal.core.ComprehensiveBenchmark
 ```
 
 ### Running from IDE
