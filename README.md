@@ -23,7 +23,7 @@ The benchmarks measure the performance of:
 
 ### Prerequisites
 
-- Java 24 or higher
+- Java 25 or higher
 - Maven 3.8 or higher
 - For JCuda benchmarks: NVIDIA CUDA-capable GPU with compute capability 3.0 (Kepler) or newer and CUDA 11.8 drivers (
   see [JCuda installation instructions](fast-decimal-jcuda/README.md#cuda-driver-installation))
