@@ -13,7 +13,9 @@
     <artifactId>fast-decimal-benchmarks</artifactId>
     <name>Fast Decimal Benchmarks</name>
     <description>JMH benchmarks for the FastDecimal library</description>
-
+    <properties>
+        <maven.compiler.release>25</maven.compiler.release>
+    </properties>
     <dependencies>
         <dependency>
             <groupId>org.tlr</groupId>
@@ -42,6 +44,14 @@
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>${maven-surefire-plugin.version}</version>
+                <configuration>
+                    <skipTests>${skipBenchmarks}</skipTests>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
                     <compilerArgs>
@@ -56,6 +66,40 @@
                         </path>
                     </annotationProcessorPaths>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>${exec-maven-plugin.version}</version>
+                <executions>
+                    <execution>
+                        <id>run-benchmarks</id>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>exec</goal>
+                        </goals>
+                        <configuration>
+                            <skip>${skipBenchmarks}</skip>
+                            <classpathScope>test</classpathScope>
+                            <executable>java</executable>
+                            <arguments>
+                                <argument>--add-modules=jdk.incubator.vector</argument>
+                                <argument>--enable-preview</argument>
+                                <argument>--enable-native-access=ALL-UNNAMED</argument>
+                                <argument>-classpath</argument>
+                                <classpath/>
+                                <argument>org.openjdk.jmh.Main</argument>
+                                <argument>-i</argument>
+                                <argument>3</argument>
+                                <argument>-wi</argument>
+                                <argument>3</argument>
+                                <argument>-f</argument>
+                                <argument>1</argument>
+                                <argument>${benchmark.includes}</argument>
+                            </arguments>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

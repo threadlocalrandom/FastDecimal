@@ -360,6 +360,7 @@ public class VectorFastDecimal {
     }
 
     private static void parallelForRanges(int length, RangeTask task) {
+        // Thanks José, Dividing the available processors by 2 avoids context switching overhead
         int cores = Math.max(1, Runtime.getRuntime().availableProcessors()/2);
         // cap tasks to avoid too small chunks
         int tasks = Math.min(cores, Math.max(1, length / (4 * SPECIES.length())));

@@ -260,7 +260,16 @@ public class FastDecimal implements Comparable<FastDecimal> {
 
     public FastDecimal multiply(FastDecimal other) {
         long product = scaledValue * other.scaledValue;
-        long result = product / SCALE_FACTOR;
+        long result;
+        long absProduct = Math.abs(product);
+        long absRemainder = absProduct % SCALE_FACTOR;
+
+        if (absRemainder * 2 >= SCALE_FACTOR) {
+            long sign = ((scaledValue ^ other.scaledValue) >= 0) ? 1 : -1;
+            result = (product / SCALE_FACTOR) + sign;
+        } else {
+            result = product / SCALE_FACTOR;
+        }
         return new FastDecimal(result);
     }
 

@@ -13,6 +13,9 @@
     <artifactId>fast-decimal-vector</artifactId>
     <name>Fast Decimal Vector</name>
     <description>Vector implementation for the FastDecimal library</description>
+    <properties>
+        <maven.compiler.release>25</maven.compiler.release>
+    </properties>
 
     <dependencies>
         <dependency>

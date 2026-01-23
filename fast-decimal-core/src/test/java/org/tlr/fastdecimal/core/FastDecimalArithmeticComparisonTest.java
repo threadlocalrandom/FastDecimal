@@ -7,6 +7,7 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Random;
 import java.util.stream.Stream;
 
@@ -19,12 +20,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class FastDecimalArithmeticComparisonTest {
 
     private static BigDecimal toBD(String s) {
-        return new BigDecimal(s);
+        return new BigDecimal(s).setScale(4, RoundingMode.HALF_UP);
     }
 
     private static String normalizeToPlainString(BigDecimal bd) {
-        // FastDecimal prints without trailing zeros (unless displayScale is forced which tests here don't use)
-        return bd.stripTrailingZeros().toPlainString();
+        return bd.toPlainString();
     }
 
     static Stream<Arguments> provideArithmeticCases() {
@@ -61,7 +61,7 @@ class FastDecimalArithmeticComparisonTest {
         return switch (op) {
             case ADD -> normalizeToPlainString(a.add(b));
             case SUBTRACT -> normalizeToPlainString(a.subtract(b));
-            case MULTIPLY -> normalizeToPlainString(a.multiply(b).setScale(4, java.math.RoundingMode.DOWN));
+            case MULTIPLY -> normalizeToPlainString(a.multiply(b).setScale(4, RoundingMode.HALF_UP));
         };
     }
 

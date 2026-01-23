@@ -16,8 +16,11 @@
     </modules>
 
     <properties>
-        <maven.compiler.release>25</maven.compiler.release>
+        <maven.compiler.release>21</maven.compiler.release>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+        <!-- Benchmark Settings -->
+        <skipBenchmarks>true</skipBenchmarks>
 
         <!-- Dependency Versions -->
         <junit-jupiter.version>5.10.0</junit-jupiter.version>
@@ -67,50 +70,21 @@
 
     benchmark profile: Used to run JMH benchmarks
     Usage: 
-      - Run benchmarks in a specific module: cd module-name && mvn test -P benchmark
-      - Run specific benchmarks: cd module-name && mvn test -P benchmark -Dbenchmark.includes="FastDecimalBenchmark"
-      - Run specific methods: cd module-name && mvn test -P benchmark -Dbenchmark.includes=".*add.*"
+      - Run benchmarks in a specific module: cd module-name && mvn test -Dbenchmark
+      - Run specific benchmarks: cd module-name && mvn test -Dbenchmark -Dbenchmark.includes="FastDecimalBenchmark"
+      - Run specific methods: cd module-name && mvn test -Dbenchmark -Dbenchmark.includes=".*add.*"
     -->
     <profiles>
         <profile>
             <id>benchmark</id>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.codehaus.mojo</groupId>
-                        <artifactId>exec-maven-plugin</artifactId>
-                        <version>${exec-maven-plugin.version}</version>
-                        <executions>
-                            <execution>
-                                <id>run-benchmarks</id>
-                                <phase>test</phase>
-                                <goals>
-                                    <goal>exec</goal>
-                                </goals>
-                                <configuration>
-                                    <classpathScope>test</classpathScope>
-                                    <executable>java</executable>
-                                    <arguments>
-                                        <argument>--add-modules=jdk.incubator.vector</argument>
-                                        <argument>--enable-preview</argument>
-                                        <argument>--enable-native-access=ALL-UNNAMED</argument>
-                                        <argument>-classpath</argument>
-                                        <classpath/>
-                                        <argument>org.openjdk.jmh.Main</argument>
-                                        <argument>-i</argument>
-                                        <argument>3</argument>
-                                        <argument>-wi</argument>
-                                        <argument>3</argument>
-                                        <argument>-f</argument>
-                                        <argument>1</argument>
-                                        <argument>${benchmark.includes}</argument>
-                                    </arguments>
-                                </configuration>
-                            </execution>
-                        </executions>
-                    </plugin>
-                </plugins>
-            </build>
+            <activation>
+                <property>
+                    <name>benchmark</name>
+                </property>
+            </activation>
+            <properties>
+                <skipBenchmarks>false</skipBenchmarks>
+            </properties>
         </profile>
     </profiles>
 
