@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="fast-decimal-core" />
+        <module name="fast-decimal-vector" />
+      </profile>
+      <profile name="Annotation profile for fast-decimal-parent" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="false">
+          <entry name="$MAVEN_REPOSITORY$/org/openjdk/jmh/jmh-generator-annprocess/1.37/jmh-generator-annprocess-1.37.jar" />
+          <entry name="$MAVEN_REPOSITORY$/org/openjdk/jmh/jmh-core/1.37/jmh-core-1.37.jar" />
+          <entry name="$MAVEN_REPOSITORY$/net/sf/jopt-simple/jopt-simple/5.0.4/jopt-simple-5.0.4.jar" />
+          <entry name="$MAVEN_REPOSITORY$/org/apache/commons/commons-math3/3.6.1/commons-math3-3.6.1.jar" />
+        </processorPath>
+        <module name="fast-decimal-benchmarks" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="fast-decimal" target="21" />
+      <module name="fast-decimal-core-jmh" target="25" />
+      <module name="fast-decimal-jcuda" target="24" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="fast-decimal-benchmarks" options="--add-modules=jdk.incubator.vector --enable-preview" />
+      <module name="fast-decimal-core-jmh" options="--add-modules=jdk.incubator.vector --enable-preview" />
+      <module name="fast-decimal-vector" options="--add-modules=jdk.incubator.vector --enable-preview" />
+    </option>
+  </component>
+</project>

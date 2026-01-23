@@ -1,0 +1,522 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AIDiffSettings">
+    <option name="showAIDiff" value="true" />
+  </component>
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="a977d7bc-f555-4ab7-9cc6-5b2fba473db7" name="Changes" comment="main&#10;&#10;- Added MIT license&#10;- Add MIT copyright to Java files">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="EmbeddingIndexingInfo">
+    <option name="cachedIndexableFilesCount" value="129" />
+    <option name="fileBasedEmbeddingIndicesEnabled" value="true" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+      </list>
+    </option>
+  </component>
+  <component name="FormatOnSaveOptions">
+    <option name="myRunOnSave" value="true" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="Use-All-Cores" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="UPDATE_TYPE" value="REBASE" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;threadlocalrandom&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/threadlocalrandom/FastDecimal.git&quot;,
+    &quot;accountId&quot;: &quot;886e1e79-c4d9-4866-8952-9251ff25c798&quot;
+  },
+  &quot;recentNewPullRequestHead&quot;: {
+    &quot;server&quot;: {
+      &quot;useHttp&quot;: false,
+      &quot;host&quot;: &quot;github.com&quot;,
+      &quot;port&quot;: null,
+      &quot;suffix&quot;: null
+    },
+    &quot;owner&quot;: &quot;threadlocalrandom&quot;,
+    &quot;repository&quot;: &quot;FastDecimal&quot;
+  }
+}</component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="jar://$PROJECT_DIR$/../../../../Program Files/Eclipse Adoptium/jdk-24.0.0.36-hotspot/lib/src.zip!/java.base/java/util/ArrayList.java" root0="SKIP_INSPECTION" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="customMavenHome" value="C:\dev\apache-maven-3.9.9" />
+        <option name="mavenHomeTypeForPersistence" value="CUSTOM" />
+      </MavenGeneralSettings>
+    </option>
+    <option name="importingSettings">
+      <MavenImportingSettings>
+        <option name="jdkForImporter" value="temurin-24" />
+      </MavenImportingSettings>
+    </option>
+  </component>
+  <component name="McpProjectServerCommands">
+    <commands />
+    <urls />
+  </component>
+  <component name="OptimizeOnSaveOptions">
+    <option name="myRunOnSave" value="true" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 8
+}</component>
+  <component name="ProjectId" id="2vwlr5O4yPWKph3lKPimRyOUBbP" />
+  <component name="ProjectViewState">
+    <option name="autoscrollFromSource" value="true" />
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.ComprehensiveBenchmark.executor": "Run",
+    "Application.FastDecimalVsVectorBenchmark.executor": "Run",
+    "Application.JCudaFastDecimalBenchmark.executor": "Run",
+    "Application.ToStringBenchmark.executor": "Run",
+    "Application.VectorFastDecimalBenchmark.executor": "Run",
+    "Application.VectorFastDecimalParallelBenchmark.executor": "Run",
+    "Application.VectorParallelVsSequentialBenchmark.executor": "Run",
+    "JUnit.ComprehensiveBenchmarkTest.executor": "Run",
+    "JUnit.CudaDebugTest.executor": "Run",
+    "JUnit.FastDecimalArithmeticComparisonTest.executor": "Run",
+    "JUnit.FastDecimalArithmeticComparisonTest.testRandomized.executor": "Run",
+    "JUnit.FastDecimalBenchmarkTest (1).executor": "Run",
+    "JUnit.FastDecimalBenchmarkTest.executor": "Run",
+    "JUnit.FastDecimalComparisonTest.executor": "Run",
+    "JUnit.FastDecimalDivideComparisonTest.executor": "Run",
+    "JUnit.FastDecimalTest (1).executor": "Run",
+    "JUnit.FastDecimalTest$ArithmeticTests.executor": "Run",
+    "JUnit.FastDecimalTest$ArithmeticTests.testDivision.executor": "Run",
+    "JUnit.FastDecimalTest$ComparisonTests.executor": "Run",
+    "JUnit.FastDecimalTest$ConstantsTests.executor": "Run",
+    "JUnit.FastDecimalTest$ConstantsTests.testConstants.executor": "Run",
+    "JUnit.FastDecimalTest$ConstructionTests.executor": "Run",
+    "JUnit.FastDecimalTest$ConstructionTests.testCreateFromValidStrings.executor": "Run",
+    "JUnit.FastDecimalTest$ConversionTests.executor": "Run",
+    "JUnit.FastDecimalTest$RoundingTests.testRounding.executor": "Run",
+    "JUnit.FastDecimalTest$ScaleTests.executor": "Run",
+    "JUnit.FastDecimalTest$SignTests.executor": "Run",
+    "JUnit.FastDecimalTest$SignTests.testSignOperations.executor": "Debug",
+    "JUnit.FastDecimalTest.executor": "Run",
+    "JUnit.FastDecimalTest.testBigDecimalConversion.executor": "Run",
+    "JUnit.FastDecimalTest.testEdgeCases.[2] -0.0001, Largest negative.executor": "Run",
+    "JUnit.FastDecimalTest.testInRange.executor": "Run",
+    "JUnit.FastDecimalTest.testNumericCreation.executor": "Run",
+    "JUnit.FastDecimalTest.testScale.executor": "Run",
+    "JUnit.FastDecimalTest.testToBigDecimal.executor": "Run",
+    "JUnit.JCudaFastDecimalTest.executor": "Run",
+    "JUnit.JCudaFastDecimalTest.testGPUSelection.executor": "Run",
+    "JUnit.JCudaFastDecimalTest.testGPUUsage.executor": "Run",
+    "JUnit.JCudaFastDecimalTest.testMultiplication.executor": "Run",
+    "JUnit.StringCacheTest.executor": "Run",
+    "JUnit.ToStringBenchmarkTest.executor": "Run",
+    "JUnit.ToStringPerformanceTest.executor": "Run",
+    "JUnit.VectorFastDecimalTest.executor": "Run",
+    "JUnit.core in fast-decimal-core.executor": "Run",
+    "JUnit.fastdecimal in fast-decimal.executor": "Run",
+    "JUnit.org.tlr.fastdecimal in fast-decimal.executor": "Run",
+    "JUnit.org.tlr.fastdecimal.core in fast-decimal-core.executor": "Run",
+    "JUnit.org.tlr.fastdecimal.vector in fast-decimal-vector.executor": "Run",
+    "JUnit.vector in fast-decimal-vector.executor": "Run",
+    "Maven.Junie Maven test: org.tlr.fastdecimal.vector.VectorFastDecimalTest.executor": "Run",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.MCP Project settings loaded": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
+    "full.screen.before.presentation.mode": "false",
+    "git-widget-placeholder": "main",
+    "ignore.preview.features.used": "true",
+    "ignore.virus.scanning.warn.message": "true",
+    "junie.onboarding.icon.badge.shown": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/dev/projects/git/FastDecimal",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "onboarding.tips.debug.path": "C:/dev/projects/FastDecimal/src/main/java/org/tlr/Main.java",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.5471264",
+    "settings.editor.selected.configurable": "copyright.filetypes.XML",
+    "to.speed.mode.migration.done": "true",
+    "update.copyright.on.save": "true",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RecapSpentCounter">
+    <option name="endsOfQuotaMs" value="1771689619000" />
+    <option name="spentUsd" value="0.0783796" />
+  </component>
+  <component name="RecapUselessUpdatesCounter">
+    <option name="suspendCountdown" value="7" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="org.tlr.fastdecimal" />
+    </key>
+  </component>
+  <component name="RunManager" selected="JUnit.FastDecimalDivideComparisonTest">
+    <configuration name="FastDecimalArithmeticComparisonTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="fast-decimal-core" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.tlr.fastdecimal.core.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="org.tlr.fastdecimal.core" />
+      <option name="MAIN_CLASS_NAME" value="org.tlr.fastdecimal.core.FastDecimalArithmeticComparisonTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="FastDecimalDivideComparisonTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="fast-decimal-core" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.tlr.fastdecimal.core.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="org.tlr.fastdecimal.core" />
+      <option name="MAIN_CLASS_NAME" value="org.tlr.fastdecimal.core.FastDecimalDivideComparisonTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="FastDecimalTest$ConstantsTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="fast-decimal-core" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.tlr.fastdecimal.core.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="org.tlr.fastdecimal.core.FastDecimalTest" />
+      <option name="MAIN_CLASS_NAME" value="org.tlr.fastdecimal.core.FastDecimalTest$ConstantsTests" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="FastDecimalTest$ConversionTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="fast-decimal-core" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.tlr.fastdecimal.core.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="org.tlr.fastdecimal.core.FastDecimalTest" />
+      <option name="MAIN_CLASS_NAME" value="org.tlr.fastdecimal.core.FastDecimalTest$ConversionTests" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="FastDecimalTest$ScaleTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="fast-decimal-core" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.tlr.fastdecimal.core.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="org.tlr.fastdecimal.core.FastDecimalTest" />
+      <option name="MAIN_CLASS_NAME" value="org.tlr.fastdecimal.core.FastDecimalTest$ScaleTests" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.FastDecimalDivideComparisonTest" />
+        <item itemvalue="JUnit.FastDecimalArithmeticComparisonTest" />
+        <item itemvalue="JUnit.FastDecimalTest$ConstantsTests" />
+        <item itemvalue="JUnit.FastDecimalTest$ConversionTests" />
+        <item itemvalue="JUnit.FastDecimalTest$ScaleTests" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-30f59d01ecdd-2fc7cc6b9a17-intellij.indexing.shared.core-IU-253.30387.90" />
+        <option value="bundled-js-predefined-d6986cc7102b-9b0f141eb926-JavaScript-IU-253.30387.90" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="a977d7bc-f555-4ab7-9cc6-5b2fba473db7" name="Changes" comment="" />
+      <created>1745064214129</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1745064214129</updated>
+      <workItem from="1745064215602" duration="299000" />
+      <workItem from="1745064528903" duration="500000" />
+      <workItem from="1745065044073" duration="935000" />
+      <workItem from="1745071052161" duration="4829000" />
+      <workItem from="1747204995178" duration="1816000" />
+      <workItem from="1747206844267" duration="4310000" />
+      <workItem from="1747215250745" duration="2100000" />
+      <workItem from="1747223697477" duration="860000" />
+      <workItem from="1747224644703" duration="952000" />
+      <workItem from="1747230789746" duration="340000" />
+      <workItem from="1747231144548" duration="1182000" />
+      <workItem from="1748332723469" duration="2321000" />
+      <workItem from="1748335082979" duration="6000" />
+      <workItem from="1748335161932" duration="497000" />
+      <workItem from="1748335676718" duration="824000" />
+      <workItem from="1748336516008" duration="178000" />
+      <workItem from="1748336750285" duration="3660000" />
+      <workItem from="1748340420015" duration="6873000" />
+      <workItem from="1748347792670" duration="103000" />
+      <workItem from="1748347971224" duration="4006000" />
+      <workItem from="1748352075731" duration="196000" />
+      <workItem from="1748352624686" duration="1096000" />
+      <workItem from="1748353847939" duration="1060000" />
+      <workItem from="1748355464274" duration="5637000" />
+      <workItem from="1748517011284" duration="4570000" />
+      <workItem from="1752764072769" duration="4355000" />
+      <workItem from="1752823268512" duration="1360000" />
+      <workItem from="1752832388471" duration="1599000" />
+      <workItem from="1753257645783" duration="600000" />
+      <workItem from="1754662099500" duration="83000" />
+      <workItem from="1754662296937" duration="173000" />
+      <workItem from="1754662556111" duration="147000" />
+      <workItem from="1754662830905" duration="5496000" />
+      <workItem from="1756459999455" duration="63000" />
+      <workItem from="1756460080309" duration="1269000" />
+      <workItem from="1756465641074" duration="711000" />
+      <workItem from="1756468071551" duration="223000" />
+      <workItem from="1757421809338" duration="449000" />
+      <workItem from="1758706495933" duration="1473000" />
+      <workItem from="1758798871480" duration="978000" />
+      <workItem from="1758802661916" duration="1173000" />
+      <workItem from="1759823292666" duration="4507000" />
+      <workItem from="1759831285627" duration="114000" />
+      <workItem from="1759831410439" duration="5000" />
+      <workItem from="1759929393005" duration="1162000" />
+      <workItem from="1759930611201" duration="1588000" />
+      <workItem from="1759996772014" duration="1240000" />
+      <workItem from="1760002509947" duration="600000" />
+      <workItem from="1760008877348" duration="913000" />
+      <workItem from="1765349811096" duration="267000" />
+      <workItem from="1765350196432" duration="1632000" />
+      <workItem from="1765451934765" duration="222000" />
+      <workItem from="1765452352550" duration="1755000" />
+      <workItem from="1765556032811" duration="1000" />
+      <workItem from="1769120993258" duration="354000" />
+      <workItem from="1769121580999" duration="4682000" />
+      <workItem from="1769126286753" duration="458000" />
+      <workItem from="1769126758318" duration="988000" />
+      <workItem from="1769128056900" duration="889000" />
+      <workItem from="1769128968226" duration="134000" />
+      <workItem from="1769129114089" duration="191000" />
+      <workItem from="1769129339313" duration="1107000" />
+      <workItem from="1769156953904" duration="4961000" />
+      <workItem from="1769162049299" duration="757000" />
+      <workItem from="1769162842172" duration="1737000" />
+      <workItem from="1769164693389" duration="2392000" />
+    </task>
+    <task id="LOCAL-00001" summary="Refactorings&#10;&#10;- replaced methods ZERO, ONE and TEN with constant equivalents&#10;- added method getRawValue that returns scaledValue&#10;- added to .gitignore">
+      <option name="closed" value="true" />
+      <created>1748334122448</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1748334122448</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Modularisation&#10;&#10;- renamed fast-decimal to fast-decimal-parent and set it to pom packaging&#10;- created maven module fast-decimal-core&#10;- moved all code and resources to fast-decimal-core&#10;- cleaned up fast-decimal-parent">
+      <option name="closed" value="true" />
+      <created>1748340183511</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1748340183511</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Vector-API&#10;&#10;- created maven module fast-decimal-vector&#10;- created VectorFastDecimal to enable Vector API operations on FastDecimals&#10;- Junie corrected a bug!">
+      <option name="closed" value="true" />
+      <created>1748348868661</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1748348868661</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Vector-API&#10;&#10;- created maven module fast-decimal-vector&#10;- created VectorFastDecimal to enable Vector API operations on FastDecimals&#10;- Junie corrected a bug!">
+      <option name="closed" value="true" />
+      <created>1748348966807</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1748348966807</updated>
+    </task>
+    <task id="LOCAL-00005" summary="JCUDA&#10;&#10;- created fast-decimal-jcuda module&#10;- created JCudaFastDecimal to enable CUDA API operations on FastDecimals&#10;- Fixed some JUnit tests and FastDecimal divide method!">
+      <option name="closed" value="true" />
+      <created>1748592998562</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1748592998562</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Use-All-Cores&#10;&#10;- added methods to VectorFastDecimal to utilise all available cores for Vector operations">
+      <option name="closed" value="true" />
+      <created>1759930361910</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1759930361910</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Use-All-Cores&#10;&#10;- added methods to VectorFastDecimal to utilise all available cores for Vector operations">
+      <option name="closed" value="true" />
+      <created>1759930371853</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1759930371853</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Use-All-Cores&#10;&#10;- added toBigDecimal methods and extend tests for this&#10;- removed unused state enum&#10;- changed release from 24 to 25">
+      <option name="closed" value="true" />
+      <created>1769124368606</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1769124368607</updated>
+    </task>
+    <task id="LOCAL-00009" summary="main&#10;&#10;AI recommended changes">
+      <option name="closed" value="true" />
+      <created>1769129297665</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1769129297665</updated>
+    </task>
+    <task id="LOCAL-00010" summary="main&#10;&#10;Changed Java prerequisite from 24 to 25">
+      <option name="closed" value="true" />
+      <created>1769129447459</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1769129447459</updated>
+    </task>
+    <task id="LOCAL-00011" summary="main&#10;&#10;Moved all JMH benchmarks to their own module">
+      <option name="closed" value="true" />
+      <created>1769130382013</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1769130382013</updated>
+    </task>
+    <task id="LOCAL-00012" summary="main&#10;&#10;- removed cachedString&#10;- implemented an optimized, non-cached, toString method">
+      <option name="closed" value="true" />
+      <created>1769158949205</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1769158949205</updated>
+    </task>
+    <task id="LOCAL-00013" summary="main&#10;&#10;- rewrote README.md&#10;- Added maven profile to enable the selective running of JMH benchmarks, default is to disable them">
+      <option name="closed" value="true" />
+      <created>1769164630377</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1769164630377</updated>
+    </task>
+    <task id="LOCAL-00014" summary="main&#10;&#10;- Added MIT license&#10;- Add MIT copyright to Java files">
+      <option name="closed" value="true" />
+      <created>1769166965539</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1769166965539</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Initial commit" />
+    <MESSAGE value="Refactorings&#10;&#10;- replaced methods ZERO, ONE and TEN with constant equivalents&#10;- added method getRawValue that returns scaledValue&#10;- added to .gitignore" />
+    <MESSAGE value="Modularisation&#10;&#10;- renamed fast-decimal to fast-decimal-parent and set it to pom packaging&#10;- created maven module fast-decimal-core&#10;- moved all code and resources to fast-decimal-core&#10;- cleaned up fast-decimal-parent" />
+    <MESSAGE value="Vector-API&#10;&#10;- created maven module fast-decimal-vector&#10;- created VectorFastDecimal to enable Vector API operations on FastDecimals&#10;- Junie corrected a bug!" />
+    <MESSAGE value="JCUDA&#10;&#10;- created fast-decimal-jcuda module&#10;- created JCudaFastDecimal to enable CUDA API operations on FastDecimals&#10;- Fixed some JUnit tests and FastDecimal divide method!" />
+    <MESSAGE value="Use-All-Cores&#10;&#10;- added methods to VectorFastDecimal to utilise all available cores for Vector operations&#10;- minor equality change&#10;&#10;# Conflicts:&#10;#&#9;fast-decimal-vector/src/main/java/org/tlr/fastdecimal/vector/VectorFastDecimal.java" />
+    <MESSAGE value="Use-All-Cores&#10;&#10;- added methods to VectorFastDecimal to utilise all available cores for Vector operations" />
+    <MESSAGE value="Use-All-Cores&#10;&#10;- added toBigDecimal methods and extend tests for this&#10;- removed unused state enum&#10;- changed release from 24 to 25" />
+    <MESSAGE value="main&#10;&#10;AI recommended changes" />
+    <MESSAGE value="main&#10;&#10;Changed Java prerequisite from 24 to 25" />
+    <MESSAGE value="main&#10;&#10;Moved all JMH benchmarks to their own module" />
+    <MESSAGE value="main&#10;&#10;- removed cachedString&#10;- implemented an optimized, non-cached, toString method" />
+    <MESSAGE value="main&#10;&#10;- rewrote README.md&#10;- Added maven profile to enable the selective running of JMH benchmarks, default is to disable them" />
+    <MESSAGE value="main&#10;&#10;- Added MIT license&#10;- Add MIT copyright to Java files" />
+    <option name="LAST_COMMIT_MESSAGE" value="main&#10;&#10;- Added MIT license&#10;- Add MIT copyright to Java files" />
+    <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
+    <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/org/tlr/fastdecimal/FastDecimal.java</url>
+          <line>49</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
+  </component>
+</project>
