@@ -278,8 +278,8 @@ public class FastDecimal implements Comparable<FastDecimal> {
     }
 
     public FastDecimal multiply(FastDecimal other) {
-        // Use a wider type for intermediate calculation to prevent overflow
-        long result = (scaledValue * other.scaledValue) / SCALE_FACTOR;
+        long product = scaledValue * other.scaledValue;
+        long result = product / SCALE_FACTOR;
         return new FastDecimal(result);
     }
 
