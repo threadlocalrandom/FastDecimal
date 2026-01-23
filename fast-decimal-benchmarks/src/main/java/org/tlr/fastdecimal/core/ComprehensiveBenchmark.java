@@ -1,3 +1,29 @@
+/*
+ * *
+ *  MIT License
+ *
+ *  Copyright (c) 2025 Andy Bailey
+ *
+ *  Permission is hereby granted, free of charge, to any person obtaining a copy
+ *  of this software and associated documentation files (the "Software"), to deal
+ *  in the Software without restriction, including without limitation the rights
+ *  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ *  copies of the Software, and to permit persons to whom the Software is
+ *  furnished to do so, subject to the following conditions:
+ *
+ *  The above copyright notice and this permission notice shall be included in all
+ *  copies or substantial portions of the Software.
+ *
+ *  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ *  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ *  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ *  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ *  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ *  SOFTWARE.
+ * /
+ */
+
 package org.tlr.fastdecimal.core;
 
 import org.openjdk.jmh.annotations.*;
@@ -23,22 +49,6 @@ import java.util.concurrent.TimeUnit;
 @State(Scope.Thread)
 public class ComprehensiveBenchmark {
 
-    // Small numbers (1-2 digits)
-    private String smallValue1 = "5.7";
-    private String smallValue2 = "3.2";
-
-    // Medium numbers (3-5 digits)
-    private String mediumValue1 = "123.45";
-    private String mediumValue2 = "67.89";
-
-    // Large numbers (close to the limit of FastDecimal)
-    private String largeValue1 = "9999999.9999";
-    private String largeValue2 = "8888888.8888";
-
-    // Numbers with different scales
-    private String mixedScale1 = "123.4567";
-    private String mixedScale2 = "98.76";
-
     // Pre-created instances
     private FastDecimal smallFast1;
     private FastDecimal smallFast2;
@@ -63,25 +73,37 @@ public class ComprehensiveBenchmark {
     @Setup
     public void setup() {
         // Initialize small numbers
+        // Small numbers (1-2 digits)
+        String smallValue1 = "5.7";
         smallFast1 = FastDecimal.of(smallValue1);
+        String smallValue2 = "3.2";
         smallFast2 = FastDecimal.of(smallValue2);
         smallBig1 = new BigDecimal(smallValue1);
         smallBig2 = new BigDecimal(smallValue2);
 
         // Initialize medium numbers
+        // Medium numbers (3-5 digits)
+        String mediumValue1 = "123.45";
         mediumFast1 = FastDecimal.of(mediumValue1);
+        String mediumValue2 = "67.89";
         mediumFast2 = FastDecimal.of(mediumValue2);
         mediumBig1 = new BigDecimal(mediumValue1);
         mediumBig2 = new BigDecimal(mediumValue2);
 
         // Initialize large numbers
+        // Large numbers (close to the limit of FastDecimal)
+        String largeValue1 = "9999999.9999";
         largeFast1 = FastDecimal.of(largeValue1);
+        String largeValue2 = "8888888.8888";
         largeFast2 = FastDecimal.of(largeValue2);
         largeBig1 = new BigDecimal(largeValue1);
         largeBig2 = new BigDecimal(largeValue2);
 
         // Initialize mixed scale numbers
+        // Numbers with different scales
+        String mixedScale1 = "123.4567";
         mixedFast1 = FastDecimal.of(mixedScale1);
+        String mixedScale2 = "98.76";
         mixedFast2 = FastDecimal.of(mixedScale2);
         mixedBig1 = new BigDecimal(mixedScale1);
         mixedBig2 = new BigDecimal(mixedScale2);
@@ -198,7 +220,8 @@ public class ComprehensiveBenchmark {
     /**
      * Main method to run the benchmark from IDE.
      */
-    public static void main(String[] args) throws RunnerException {
+    @SuppressWarnings("unused")
+    static void main(String[] args) throws RunnerException {
         Options options = new OptionsBuilder()
                 .include(ComprehensiveBenchmark.class.getSimpleName())
                 .build();

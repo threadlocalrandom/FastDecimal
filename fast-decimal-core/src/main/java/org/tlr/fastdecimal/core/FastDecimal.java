@@ -1,3 +1,29 @@
+/*
+ * *
+ *  MIT License
+ *
+ *  Copyright (c) 2025 Andy Bailey
+ *
+ *  Permission is hereby granted, free of charge, to any person obtaining a copy
+ *  of this software and associated documentation files (the "Software"), to deal
+ *  in the Software without restriction, including without limitation the rights
+ *  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ *  copies of the Software, and to permit persons to whom the Software is
+ *  furnished to do so, subject to the following conditions:
+ *
+ *  The above copyright notice and this permission notice shall be included in all
+ *  copies or substantial portions of the Software.
+ *
+ *  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ *  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ *  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ *  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ *  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ *  SOFTWARE.
+ * /
+ */
+
 package org.tlr.fastdecimal.core;
 
 import java.math.BigDecimal;
@@ -41,7 +67,7 @@ public class FastDecimal implements Comparable<FastDecimal> {
      *
      * @param value BigDecimal value (non-null)
      * @throws NullPointerException if value is null
-     * @throws ArithmeticException if the scaled value doesn't fit into a 64-bit signed integer
+     * @throws ArithmeticException  if the scaled value doesn't fit into a 64-bit signed integer
      */
     public FastDecimal(BigDecimal value) {
         this(scaleFromBigDecimal(value));
@@ -116,7 +142,7 @@ public class FastDecimal implements Comparable<FastDecimal> {
         // Pre-calculate exact capacity: sign (1) + whole part (len - 4 or 1) + dot (1) + fractional part (4)
         int capacity = (scaledValue < 0 ? 1 : 0) + Math.max(len - SCALE_DIGITS, 1) + 1 + SCALE_DIGITS;
         StringBuilder sb = new StringBuilder(capacity);
-        
+
         if (scaledValue < 0) {
             sb.append('-');
         }
