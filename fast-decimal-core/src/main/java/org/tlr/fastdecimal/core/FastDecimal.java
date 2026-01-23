@@ -31,11 +31,6 @@ public class FastDecimal implements Comparable<FastDecimal> {
     private final long scaledValue;
 
 
-    /**
-     * Cache for the string representation of this decimal number
-     */
-    private String stringCache;
-
     private FastDecimal(long scaledValue) {
         this.scaledValue = scaledValue;
     }
@@ -98,7 +93,7 @@ public class FastDecimal implements Comparable<FastDecimal> {
     }
 
     /**
-     * Returns this FastDecimal as a long, discarding any fractional part.
+     * Returns this FastDecimal as a long value, discarding any fractional part.
      * This conversion is done by dividing the scaled value by the scale factor.
      *
      * @return the whole number part of this FastDecimal as a long
@@ -109,49 +104,35 @@ public class FastDecimal implements Comparable<FastDecimal> {
 
     @Override
     public String toString() {
-        // Return cached value if available
-        if (stringCache != null) {
-            return stringCache;
+        if (scaledValue == 0) {
+            return "0.0000";
         }
 
-        long abs = Math.abs(scaledValue);
-        long wholePart = abs / SCALE_FACTOR;
-        long decimalPart = abs % SCALE_FACTOR;
+        long absValue = Math.abs(scaledValue);
+        // Use a fast path for small numbers if possible, but Long.toString is generally well-optimized
+        String s = Long.toString(absValue);
+        int len = s.length();
 
-        // Fast path for zero decimal part
-        if (decimalPart == 0) {
-            stringCache = scaledValue < 0 ? "-" + wholePart : Long.toString(wholePart);
-            return stringCache;
-        }
-
-        // Optimize for common case
-        StringBuilder result = new StringBuilder(16); // Pre-allocate reasonable size
+        // Pre-calculate exact capacity: sign (1) + whole part (len - 4 or 1) + dot (1) + fractional part (4)
+        int capacity = (scaledValue < 0 ? 1 : 0) + Math.max(len - SCALE_DIGITS, 1) + 1 + SCALE_DIGITS;
+        StringBuilder sb = new StringBuilder(capacity);
+        
         if (scaledValue < 0) {
-            result.append('-');
-        }
-        result.append(wholePart);
-        result.append('.');
-
-        // Manually format decimal part with leading zeros
-        // This is much faster than String.format
-        char[] decimalChars = new char[SCALE_DIGITS];
-        for (int i = SCALE_DIGITS - 1; i >= 0; i--) {
-            decimalChars[i] = (char) ('0' + (decimalPart % 10));
-            decimalPart /= 10;
+            sb.append('-');
         }
 
-        // Find last non-zero digit to remove trailing zeros
-        int lastNonZero = SCALE_DIGITS - 1;
-        while (lastNonZero >= 0 && decimalChars[lastNonZero] == '0') {
-            lastNonZero--;
+        if (len <= SCALE_DIGITS) {
+            sb.append("0.");
+            sb.append("0".repeat(SCALE_DIGITS - len));
+            sb.append(s);
+        } else {
+            int decimalPos = len - SCALE_DIGITS;
+            sb.append(s, 0, decimalPos);
+            sb.append('.');
+            sb.append(s, decimalPos, len);
         }
 
-        // Append decimal digits without trailing zeros
-        result.append(decimalChars, 0, lastNonZero + 1);
-
-        // Cache and return the result
-        stringCache = result.toString();
-        return stringCache;
+        return sb.toString();
     }
 
     /**

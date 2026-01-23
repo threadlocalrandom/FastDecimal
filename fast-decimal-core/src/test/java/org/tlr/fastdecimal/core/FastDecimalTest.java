@@ -23,20 +23,20 @@ class FastDecimalTest {
         @DisplayName("Create from valid strings")
         void testCreateFromValidStrings() {
             assertEquals("1.2345", FastDecimal.of("1.23456678").toString());
-            assertEquals("1.23", FastDecimal.of("1.23").toString());
-            assertEquals("0", FastDecimal.of("0").toString());
-            assertEquals("-1.23", FastDecimal.of("-1.23").toString());
-            assertEquals("1", FastDecimal.of("1.0").toString());
-            assertEquals("1000", FastDecimal.of("1000").toString());
+            assertEquals("1.2300", FastDecimal.of("1.23").toString());
+            assertEquals("0.0000", FastDecimal.of("0").toString());
+            assertEquals("-1.2300", FastDecimal.of("-1.23").toString());
+            assertEquals("1.0000", FastDecimal.of("1.0").toString());
+            assertEquals("1000.0000", FastDecimal.of("1000").toString());
         }
 
         @Test
         @DisplayName("Create from valid doubles")
         void testCreateFromValidDoubles() {
-            assertEquals("1.23", FastDecimal.of(1.23).toString());
-            assertEquals("0", FastDecimal.of(0.0).toString());
-            assertEquals("-1.23", FastDecimal.of(-1.23).toString());
-            assertEquals("1000", FastDecimal.of(1000.0).toString());
+            assertEquals("1.2300", FastDecimal.of(1.23).toString());
+            assertEquals("0.0000", FastDecimal.of(0.0).toString());
+            assertEquals("-1.2300", FastDecimal.of(-1.23).toString());
+            assertEquals("1000.0000", FastDecimal.of(1000.0).toString());
         }
 
         @Test
@@ -65,8 +65,8 @@ class FastDecimalTest {
         void testAddition() {
             FastDecimal a = FastDecimal.of("1.23");
             FastDecimal b = FastDecimal.of("4.56");
-            assertEquals("5.79", a.add(b).toString());
-            assertEquals("0", a.add(a.negate()).toString());
+            assertEquals("5.7900", a.add(b).toString());
+            assertEquals("0.0000", a.add(a.negate()).toString());
         }
 
         @Test
@@ -74,8 +74,8 @@ class FastDecimalTest {
         void testSubtraction() {
             FastDecimal a = FastDecimal.of("4.56");
             FastDecimal b = FastDecimal.of("1.23");
-            assertEquals("3.33", a.subtract(b).toString());
-            assertEquals("0", a.subtract(a).toString());
+            assertEquals("3.3300", a.subtract(b).toString());
+            assertEquals("0.0000", a.subtract(a).toString());
         }
 
         @Test
@@ -83,8 +83,8 @@ class FastDecimalTest {
         void testMultiplication() {
             FastDecimal a = FastDecimal.of("2.5");
             FastDecimal b = FastDecimal.of("3");
-            assertEquals("7.5", a.multiply(b).toString());
-            assertEquals("0", a.multiply(FastDecimal.ZERO).toString());
+            assertEquals("7.5000", a.multiply(b).toString());
+            assertEquals("0.0000", a.multiply(FastDecimal.ZERO).toString());
         }
 
         @Test
@@ -97,8 +97,8 @@ class FastDecimalTest {
             BigDecimal bc = new BigDecimal("3.0000").setScale(4, RoundingMode.HALF_UP);
             BigDecimal bd = new BigDecimal("0.1234");
             var bs = bc.divide(bd, RoundingMode.HALF_UP);
-            assertEquals(bs.toString(), c.divide(d).toString());
-            assertEquals("3", a.divide(b).toString());
+            assertEquals(bs.setScale(4, RoundingMode.HALF_UP).toString(), c.divide(d).toString());
+            assertEquals("3.0000", a.divide(b).toString());
             assertThrows(ArithmeticException.class, () -> a.divide(FastDecimal.ZERO));
         }
     }
@@ -191,7 +191,7 @@ class FastDecimalTest {
             FastDecimal value = FastDecimal.of("1.23");
             assertEquals(1L, value.longValue());
             assertEquals(1.23d, value.doubleValue(), 0.000001);
-            assertEquals("1.23", value.toString());
+            assertEquals("1.2300", value.toString());
             assertEquals(12300L, value.getScaledValue());
             assertEquals(new BigDecimal("1.23"), value.toBigDecimal());
             assertEquals(new BigDecimal("1.2300"), value.toBigDecimal(4));
@@ -206,9 +206,9 @@ class FastDecimalTest {
         @Test
         @DisplayName("Test predefined constants")
         void testConstants() {
-            assertEquals("0", FastDecimal.ZERO.toString());
-            assertEquals("1", FastDecimal.ONE.toString());
-            assertEquals("10", FastDecimal.TEN.toString());
+            assertEquals("0.0000", FastDecimal.ZERO.toString());
+            assertEquals("1.0000", FastDecimal.ONE.toString());
+            assertEquals("10.0000", FastDecimal.TEN.toString());
         }
     }
 
