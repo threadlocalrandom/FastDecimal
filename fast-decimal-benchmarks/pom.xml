@@ -14,7 +14,7 @@
     <name>Fast Decimal Benchmarks</name>
     <description>JMH benchmarks for the FastDecimal library</description>
     <properties>
-        <maven.compiler.release>25</maven.compiler.release>
+        <maven.compiler.release>26</maven.compiler.release>
     </properties>
     <dependencies>
         <dependency>
