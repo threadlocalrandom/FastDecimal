@@ -24,7 +24,7 @@
  * /
  */
 
-package org.tlr.fastdecimal.core;
+package org.tlr.fastdecimal.valuetype;
 
 import org.openjdk.jmh.annotations.*;
 import org.openjdk.jmh.infra.Blackhole;
@@ -50,46 +50,46 @@ import java.util.concurrent.TimeUnit;
 @Measurement(iterations = 5, time = 20, timeUnit = TimeUnit.SECONDS)
 @Fork(value = 1, jvmArgs = {"--add-modules=jdk.incubator.vector", "--enable-preview"})
 @State(Scope.Benchmark)
-public class FastDecimalBenchmark {
+public class ValueFastDecimalBenchmark {
 
     // Values for benchmarking
     private final String stringValue1 = "123.4567";
     private final double doubleValue1 = 123.4567;
 
     // Pre-created instances for operation benchmarks
-    private FastDecimal fastDecimal1;
-    private FastDecimal fastDecimal2;
+    private ValueFastDecimal valueFastDecimal1;
+    private ValueFastDecimal valueFastDecimal2;
     private BigDecimal bigDecimal1;
     private BigDecimal bigDecimal2;
 
     @Setup
     public void setup() {
         // Initialize the pre-created instances
-        fastDecimal1 = FastDecimal.of(stringValue1);
+        valueFastDecimal1 = ValueFastDecimal.of(stringValue1);
         String stringValue2 = "98.7654";
-        fastDecimal2 = FastDecimal.of(stringValue2);
+        valueFastDecimal2 = ValueFastDecimal.of(stringValue2);
         bigDecimal1 = new BigDecimal(stringValue1);
         bigDecimal2 = new BigDecimal(stringValue2);
     }
 
     // Creation benchmarks
 
-    // @Benchmark
+    @Benchmark
     public void createFastDecimalFromString(Blackhole blackhole) {
-        blackhole.consume(FastDecimal.of(stringValue1));
+        blackhole.consume(ValueFastDecimal.of(stringValue1));
     }
 
-    // @Benchmark
+    @Benchmark
     public void createBigDecimalFromString(Blackhole blackhole) {
         blackhole.consume(new BigDecimal(stringValue1));
     }
 
-    // @Benchmark
+    @Benchmark
     public void createFastDecimalFromDouble(Blackhole blackhole) {
-        blackhole.consume(FastDecimal.of(doubleValue1));
+        blackhole.consume(ValueFastDecimal.of(doubleValue1));
     }
 
-    // @Benchmark
+    @Benchmark
     public void createBigDecimalFromDouble(Blackhole blackhole) {
         blackhole.consume(BigDecimal.valueOf(doubleValue1));
     }
@@ -98,7 +98,7 @@ public class FastDecimalBenchmark {
 
     @Benchmark
     public void addFastDecimal(Blackhole blackhole) {
-        blackhole.consume(fastDecimal1.add(fastDecimal2));
+        blackhole.consume(valueFastDecimal1.add(valueFastDecimal2));
     }
 
     @Benchmark
@@ -108,60 +108,60 @@ public class FastDecimalBenchmark {
 
     // Subtraction benchmarks
 
-    // @Benchmark
+    @Benchmark
     public void subtractFastDecimal(Blackhole blackhole) {
-        blackhole.consume(fastDecimal1.subtract(fastDecimal2));
+        blackhole.consume(valueFastDecimal1.subtract(valueFastDecimal2));
     }
 
-    // @Benchmark
+    @Benchmark
     public void subtractBigDecimal(Blackhole blackhole) {
         blackhole.consume(bigDecimal1.subtract(bigDecimal2));
     }
 
     // Multiplication benchmarks
 
-    // @Benchmark
+    @Benchmark
     public void multiplyFastDecimal(Blackhole blackhole) {
-        blackhole.consume(fastDecimal1.multiply(fastDecimal2));
+        blackhole.consume(valueFastDecimal1.multiply(valueFastDecimal2));
     }
 
-    // @Benchmark
+    @Benchmark
     public void multiplyBigDecimal(Blackhole blackhole) {
         blackhole.consume(bigDecimal1.multiply(bigDecimal2));
     }
 
     // Division benchmarks
 
-    // @Benchmark
+    @Benchmark
     public void divideFastDecimal(Blackhole blackhole) {
-        blackhole.consume(fastDecimal1.divide(fastDecimal2));
+        blackhole.consume(valueFastDecimal1.divide(valueFastDecimal2));
     }
 
-    // @Benchmark
+    @Benchmark
     public void divideBigDecimal(Blackhole blackhole) {
         blackhole.consume(bigDecimal1.divide(bigDecimal2, RoundingMode.HALF_UP));
     }
 
     // Comparison benchmarks
 
-    // @Benchmark
+    @Benchmark
     public void compareFastDecimal(Blackhole blackhole) {
-        blackhole.consume(fastDecimal1.compareTo(fastDecimal2));
+        blackhole.consume(valueFastDecimal1.compareTo(valueFastDecimal2));
     }
 
-    // @Benchmark
+    @Benchmark
     public void compareBigDecimal(Blackhole blackhole) {
         blackhole.consume(bigDecimal1.compareTo(bigDecimal2));
     }
 
     // String conversion benchmarks
 
-    // @Benchmark
+    @Benchmark
     public void toStringFastDecimal(Blackhole blackhole) {
-        blackhole.consume(fastDecimal1.toString());
+        blackhole.consume(valueFastDecimal1.toString());
     }
 
-    // @Benchmark
+    @Benchmark
     public void toStringBigDecimal(Blackhole blackhole) {
         blackhole.consume(bigDecimal1.toString());
     }
@@ -172,7 +172,7 @@ public class FastDecimalBenchmark {
     @SuppressWarnings("unused")
     static void main(String[] args) throws RunnerException {
         Options options = new OptionsBuilder()
-                .include(FastDecimalBenchmark.class.getSimpleName())
+                .include(ValueFastDecimalBenchmark.class.getSimpleName())
                 .build();
         new Runner(options).run();
     }

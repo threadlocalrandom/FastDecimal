@@ -23,6 +23,11 @@
             <artifactId>fast-decimal-core</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.tlr</groupId>
+            <artifactId>fast-decimal-valuetype</artifactId>
+            <version>${project.version}</version>
+        </dependency>
         <!-- Test dependencies are inherited from parent -->
     </dependencies>
 

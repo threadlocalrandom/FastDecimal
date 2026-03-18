@@ -6,6 +6,7 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="fast-decimal-valuetype" />
         <module name="fast-decimal-core" />
         <module name="fast-decimal-vector" />
       </profile>
@@ -23,15 +24,17 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="fast-decimal" target="21" />
-      <module name="fast-decimal-core-jmh" target="25" />
-      <module name="fast-decimal-jcuda" target="24" />
+      <module name="fast-decimal" target="26" />
+      <module name="fast-decimal-benchmarks" target="26" />
+      <module name="fast-decimal-core" target="26" />
+      <module name="fast-decimal-valuetype" target="26" />
+      <module name="fast-decimal-vector" target="26" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="fast-decimal-benchmarks" options="--add-modules=jdk.incubator.vector --enable-preview" />
-      <module name="fast-decimal-core-jmh" options="--add-modules=jdk.incubator.vector --enable-preview" />
+      <module name="fast-decimal-valuetype" options="--enable-preview" />
       <module name="fast-decimal-vector" options="--add-modules=jdk.incubator.vector --enable-preview" />
     </option>
   </component>

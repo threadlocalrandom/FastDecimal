@@ -41,12 +41,12 @@ import java.util.concurrent.TimeUnit;
  * A more comprehensive benchmark comparing FastDecimal and BigDecimal
  * with different scales and magnitudes of numbers.
  */
-@BenchmarkMode(Mode.AverageTime)
+@BenchmarkMode({Mode.AverageTime})
 @OutputTimeUnit(TimeUnit.NANOSECONDS)
-@Warmup(iterations = 3, time = 1)
-@Measurement(iterations = 5, time = 1)
-@Fork(1)
-@State(Scope.Thread)
+@Warmup(iterations = 3, time = 20, timeUnit = TimeUnit.SECONDS)
+@Measurement(iterations = 5, time = 20, timeUnit = TimeUnit.SECONDS)
+@Fork(value = 1, jvmArgs = {"--add-modules=jdk.incubator.vector", "--enable-preview"})
+@State(Scope.Benchmark)
 public class ComprehensiveBenchmark {
 
     // Pre-created instances

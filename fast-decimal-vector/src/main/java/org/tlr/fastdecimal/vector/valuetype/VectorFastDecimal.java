@@ -24,13 +24,11 @@
  * /
  */
 
-package org.tlr.fastdecimal.vector;
+package org.tlr.fastdecimal.vector.valuetype;
 
 import jdk.incubator.vector.LongVector;
-import jdk.incubator.vector.VectorMask;
-import jdk.incubator.vector.VectorOperators;
 import jdk.incubator.vector.VectorSpecies;
-import org.tlr.fastdecimal.core.FastDecimal;
+import org.tlr.fastdecimal.valuetype.ValueFastDecimal;
 
 import java.util.stream.IntStream;
 
@@ -55,7 +53,7 @@ public class VectorFastDecimal {
      * @return a new array containing the element-wise sum of a and b
      * @throws IllegalArgumentException if the arrays have different lengths
      */
-    public static FastDecimal[] add(FastDecimal[] a, FastDecimal[] b) {
+    public static ValueFastDecimal[] add(ValueFastDecimal[] a, ValueFastDecimal[] b) {
         if (a.length != b.length) {
             throw new IllegalArgumentException("Arrays must have the same length");
         }
@@ -80,7 +78,7 @@ public class VectorFastDecimal {
      * @return a new array containing the element-wise difference of a and b
      * @throws IllegalArgumentException if the arrays have different lengths
      */
-    public static FastDecimal[] subtract(FastDecimal[] a, FastDecimal[] b) {
+    public static ValueFastDecimal[] subtract(ValueFastDecimal[] a, ValueFastDecimal[] b) {
         if (a.length != b.length) {
             throw new IllegalArgumentException("Arrays must have the same length");
         }
@@ -105,7 +103,7 @@ public class VectorFastDecimal {
      * @return a new array containing the element-wise product of a and b
      * @throws IllegalArgumentException if the arrays have different lengths
      */
-    public static FastDecimal[] multiply(FastDecimal[] a, FastDecimal[] b) {
+    public static ValueFastDecimal[] multiply(ValueFastDecimal[] a, ValueFastDecimal[] b) {
         if (a.length != b.length) {
             throw new IllegalArgumentException("Arrays must have the same length");
         }
@@ -127,33 +125,13 @@ public class VectorFastDecimal {
             LongVector vb = LongVector.fromArray(SPECIES, bValues, i);
 
             // Multiply and divide by 10_000 to maintain the correct scale
-            // Note: Vector API doesn't have an easy way to do the custom rounding with vectors efficiently
-            // without complex masking/comparisons. For now, we use standard division which is FLOOR.
-            // To match FastDecimal.multiply exactly, we should use the same rounding logic.
-            LongVector product = va.mul(vb);
-            LongVector quotient = product.div(10_000L);
-            LongVector absProduct = product.abs();
-            // rem = absProduct - (absProduct / 10000) * 10000
-            LongVector absRemainder = absProduct.sub(absProduct.div(10_000L).mul(10_000L));
-
-            VectorMask<Long> roundUp = absRemainder.mul(2L).compare(VectorOperators.GE, 10_000L);
-            LongVector vSign = LongVector.broadcast(SPECIES, 1L).blend(LongVector.broadcast(SPECIES, -1L), va.lanewise(VectorOperators.XOR, vb).compare(VectorOperators.LT, 0));
-            LongVector result = quotient.add(LongVector.broadcast(SPECIES, 0L).add(vSign, roundUp));
-
+            LongVector result = va.mul(vb).div(10_000L);
             result.intoArray(resultValues, i);
         }
 
         // Process remaining elements
         for (; i < a.length; i++) {
-            long product = aValues[i] * bValues[i];
-            long absProduct = Math.abs(product);
-            long absRemainder = absProduct % 10_000L;
-            if (absRemainder * 2 >= 10_000L) {
-                long sign = ((aValues[i] ^ bValues[i]) >= 0) ? 1 : -1;
-                resultValues[i] = (product / 10_000L) + sign;
-            } else {
-                resultValues[i] = product / 10_000L;
-            }
+            resultValues[i] = (aValues[i] * bValues[i]) / 10_000L;
         }
 
         // Convert back to FastDecimal objects
@@ -164,7 +142,7 @@ public class VectorFastDecimal {
      * Adds two arrays using all available CPU cores. The computation within each chunk
      * remains vectorized via the Vector API. Falls back to single-threaded for small arrays.
      */
-    public static FastDecimal[] addParallel(FastDecimal[] a, FastDecimal[] b) {
+    public static ValueFastDecimal[] addParallel(ValueFastDecimal[] a, ValueFastDecimal[] b) {
         if (a.length != b.length) {
             throw new IllegalArgumentException("Arrays must have the same length");
         }
@@ -181,7 +159,7 @@ public class VectorFastDecimal {
     /**
      * Subtracts two arrays using all available CPU cores. Vectorized inside chunks.
      */
-    public static FastDecimal[] subtractParallel(FastDecimal[] a, FastDecimal[] b) {
+    public static ValueFastDecimal[] subtractParallel(ValueFastDecimal[] a, ValueFastDecimal[] b) {
         if (a.length != b.length) {
             throw new IllegalArgumentException("Arrays must have the same length");
         }
@@ -198,7 +176,7 @@ public class VectorFastDecimal {
     /**
      * Multiplies two arrays using all available CPU cores. Vectorized inside chunks.
      */
-    public static FastDecimal[] multiplyParallel(FastDecimal[] a, FastDecimal[] b) {
+    public static ValueFastDecimal[] multiplyParallel(ValueFastDecimal[] a, ValueFastDecimal[] b) {
         if (a.length != b.length) {
             throw new IllegalArgumentException("Arrays must have the same length");
         }
@@ -215,7 +193,7 @@ public class VectorFastDecimal {
     /**
      * Divides two arrays using all available CPU cores with HALF_UP rounding.
      */
-    public static FastDecimal[] divideParallel(FastDecimal[] a, FastDecimal[] b) {
+    public static ValueFastDecimal[] divideParallel(ValueFastDecimal[] a, ValueFastDecimal[] b) {
         if (a.length != b.length) {
             throw new IllegalArgumentException("Arrays must have the same length");
         }
@@ -244,7 +222,7 @@ public class VectorFastDecimal {
      * @throws IllegalArgumentException if the arrays have different lengths
      * @throws ArithmeticException      if any element in b is zero
      */
-    public static FastDecimal[] divide(FastDecimal[] a, FastDecimal[] b) {
+    public static ValueFastDecimal[] divide(ValueFastDecimal[] a, ValueFastDecimal[] b) {
         if (a.length != b.length) {
             throw new IllegalArgumentException("Arrays must have the same length");
         }
@@ -293,7 +271,7 @@ public class VectorFastDecimal {
      * @param decimals the array of FastDecimal objects
      * @return an array of the scaled values
      */
-    private static long[] extractScaledValues(FastDecimal[] decimals) {
+    private static long[] extractScaledValues(ValueFastDecimal[] decimals) {
         long[] values = new long[decimals.length];
         for (int i = 0; i < decimals.length; i++) {
             // We need to access the internal scaled value
@@ -309,8 +287,8 @@ public class VectorFastDecimal {
      * @param values the array of scaled values
      * @return an array of FastDecimal objects
      */
-    private static FastDecimal[] createFastDecimals(long[] values) {
-        FastDecimal[] decimals = new FastDecimal[values.length];
+    private static ValueFastDecimal[] createFastDecimals(long[] values) {
+        ValueFastDecimal[] decimals = new ValueFastDecimal[values.length];
         for (int i = 0; i < values.length; i++) {
             // This assumes FastDecimal has a factory method that takes a scaled value
             decimals[i] = createFromScaledValue(values[i]);
@@ -325,7 +303,7 @@ public class VectorFastDecimal {
      * @param decimal the FastDecimal object
      * @return the scaled value
      */
-    private static long getScaledValue(FastDecimal decimal) {
+    private static long getScaledValue(ValueFastDecimal decimal) {
         // Use the public getScaledValue method
         return decimal.getScaledValue();
     }
@@ -337,9 +315,9 @@ public class VectorFastDecimal {
      * @param scaledValue the scaled value
      * @return a new FastDecimal object
      */
-    private static FastDecimal createFromScaledValue(long scaledValue) {
+    private static ValueFastDecimal createFromScaledValue(long scaledValue) {
         // Use the public fromScaledValue factory method
-        return FastDecimal.fromScaledValue(scaledValue);
+        return ValueFastDecimal.fromScaledValue(scaledValue);
     }
 
     /**
@@ -459,29 +437,10 @@ public class VectorFastDecimal {
         for (; i < upper; i += SPECIES.length()) {
             LongVector va = LongVector.fromArray(SPECIES, a, i);
             LongVector vb = LongVector.fromArray(SPECIES, b, i);
-
-            LongVector product = va.mul(vb);
-            LongVector quotient = product.div(10_000L);
-            LongVector absProduct = product.abs();
-            // rem = absProduct - (absProduct / 10000) * 10000
-            LongVector absRemainder = absProduct.sub(absProduct.div(10_000L).mul(10_000L));
-
-            VectorMask<Long> roundUp = absRemainder.mul(2L).compare(VectorOperators.GE, 10_000L);
-            LongVector vSign = LongVector.broadcast(SPECIES, 1L).blend(LongVector.broadcast(SPECIES, -1L), va.lanewise(VectorOperators.XOR, vb).compare(VectorOperators.LT, 0));
-            LongVector result = quotient.add(LongVector.broadcast(SPECIES, 0L).add(vSign, roundUp));
-
-            result.intoArray(out, i);
+            va.mul(vb).div(10_000L).intoArray(out, i);
         }
         for (; i < end; i++) {
-            long product = a[i] * b[i];
-            long absProduct = Math.abs(product);
-            long absRemainder = absProduct % 10_000L;
-            if (absRemainder * 2 >= 10_000L) {
-                long sign = ((a[i] ^ b[i]) >= 0) ? 1 : -1;
-                out[i] = (product / 10_000L) + sign;
-            } else {
-                out[i] = product / 10_000L;
-            }
+            out[i] = (a[i] * b[i]) / 10_000L;
         }
     }
 

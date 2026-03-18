@@ -41,25 +41,34 @@ import java.util.concurrent.TimeUnit;
  * Benchmark to compare the performance of regular FastDecimal operations
  * with vectorized operations using the Vector API.
  */
-@BenchmarkMode(Mode.AverageTime)
-@OutputTimeUnit(TimeUnit.MICROSECONDS)
-@State(Scope.Thread)
-@Warmup(iterations = 3, time = 1)
-@Measurement(iterations = 5, time = 1)
+@BenchmarkMode({Mode.AverageTime})
+@OutputTimeUnit(TimeUnit.NANOSECONDS)
+@Warmup(iterations = 3, time = 20, timeUnit = TimeUnit.SECONDS)
+@Measurement(iterations = 5, time = 20, timeUnit = TimeUnit.SECONDS)
 @Fork(value = 1, jvmArgs = {"--add-modules=jdk.incubator.vector", "--enable-preview"})
+@State(Scope.Benchmark)
 public class VectorFastDecimalBenchmark {
 
-    @Param({"100", "1000", "10000"})
+    @Param({"128",
+            "256",
+            "512",
+            "1024"
+    })
+
     private int size;
 
     private FastDecimal[] array1;
     private FastDecimal[] array2;
+    private FastDecimal[] result;
+    private FastDecimal[] safeArray2;
 
     @Setup
     public void setup() {
         Random random = new Random(42); // Fixed seed for reproducibility
+
         array1 = new FastDecimal[size];
         array2 = new FastDecimal[size];
+        result = new FastDecimal[size];
 
         // Initialize arrays with random values
         for (int i = 0; i < size; i++) {
@@ -69,6 +78,14 @@ public class VectorFastDecimalBenchmark {
             array1[i] = FastDecimal.of(value1);
             array2[i] = FastDecimal.of(value2);
         }
+        safeArray2 = new FastDecimal[size];
+        for (int i = 0; i < size; i++) {
+            if (array2[i].isZero()) {
+                safeArray2[i] = FastDecimal.ONE; // Replace zeros with ONE
+            } else {
+                safeArray2[i] = array2[i];
+            }
+        }
     }
 
     /**
@@ -76,7 +93,6 @@ public class VectorFastDecimalBenchmark {
      */
     @Benchmark
     public void regularAdd(Blackhole blackhole) {
-        FastDecimal[] result = new FastDecimal[size];
         for (int i = 0; i < size; i++) {
             result[i] = array1[i].add(array2[i]);
         }
@@ -97,7 +113,6 @@ public class VectorFastDecimalBenchmark {
      */
     @Benchmark
     public void regularSubtract(Blackhole blackhole) {
-        FastDecimal[] result = new FastDecimal[size];
         for (int i = 0; i < size; i++) {
             result[i] = array1[i].subtract(array2[i]);
         }
@@ -118,7 +133,6 @@ public class VectorFastDecimalBenchmark {
      */
     @Benchmark
     public void regularMultiply(Blackhole blackhole) {
-        FastDecimal[] result = new FastDecimal[size];
         for (int i = 0; i < size; i++) {
             result[i] = array1[i].multiply(array2[i]);
         }
@@ -139,7 +153,6 @@ public class VectorFastDecimalBenchmark {
      */
     @Benchmark
     public void regularDivide(Blackhole blackhole) {
-        FastDecimal[] result = new FastDecimal[size];
         for (int i = 0; i < size; i++) {
             // Skip division by zero
             if (!array2[i].isZero()) {
@@ -158,14 +171,6 @@ public class VectorFastDecimalBenchmark {
     @Benchmark
     public void vectorDivide(Blackhole blackhole) {
         // Create a copy of array2 to ensure no zeros
-        FastDecimal[] safeArray2 = new FastDecimal[size];
-        for (int i = 0; i < size; i++) {
-            if (array2[i].isZero()) {
-                safeArray2[i] = FastDecimal.ONE; // Replace zeros with ONE
-            } else {
-                safeArray2[i] = array2[i];
-            }
-        }
 
         FastDecimal[] result = VectorFastDecimal.divide(array1, safeArray2);
         blackhole.consume(result);

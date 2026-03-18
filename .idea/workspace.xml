@@ -8,7 +8,27 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a977d7bc-f555-4ab7-9cc6-5b2fba473db7" name="Changes" comment="main&#10;&#10;- prepared for ValueTypes">
+      <change afterPath="$PROJECT_DIR$/fast-decimal-benchmarks/src/main/java/org/tlr/fastdecimal/valuetype/ValueFastDecimalBenchmark.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/fast-decimal-benchmarks/src/main/java/org/tlr/fastdecimal/valuetype/ValueFastDecimalVsVectorBenchmark.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/fast-decimal-valuetype/src/main/java/org/tlr/fastdecimal/valuetype/ValueFastDecimal.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/fast-decimal-vector/src/main/java/org/tlr/fastdecimal/vector/valuetype/VectorFastDecimal.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/jmh/vector.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fast-decimal-benchmarks/dependency-reduced-pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/fast-decimal-benchmarks/dependency-reduced-pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fast-decimal-benchmarks/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/fast-decimal-benchmarks/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fast-decimal-benchmarks/src/main/java/org/tlr/fastdecimal/core/ComprehensiveBenchmark.java" beforeDir="false" afterPath="$PROJECT_DIR$/fast-decimal-benchmarks/src/main/java/org/tlr/fastdecimal/core/ComprehensiveBenchmark.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fast-decimal-benchmarks/src/main/java/org/tlr/fastdecimal/core/FastDecimalBenchmark.java" beforeDir="false" afterPath="$PROJECT_DIR$/fast-decimal-benchmarks/src/main/java/org/tlr/fastdecimal/core/FastDecimalBenchmark.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fast-decimal-benchmarks/src/main/java/org/tlr/fastdecimal/core/ToStringBenchmark.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/fast-decimal-benchmarks/src/main/java/org/tlr/fastdecimal/vector/FastDecimalVsVectorBenchmark.java" beforeDir="false" afterPath="$PROJECT_DIR$/fast-decimal-benchmarks/src/main/java/org/tlr/fastdecimal/vector/FastDecimalVsVectorBenchmark.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fast-decimal-benchmarks/src/main/java/org/tlr/fastdecimal/vector/VectorFastDecimalBenchmark.java" beforeDir="false" afterPath="$PROJECT_DIR$/fast-decimal-benchmarks/src/main/java/org/tlr/fastdecimal/vector/VectorFastDecimalBenchmark.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fast-decimal-benchmarks/src/main/java/org/tlr/fastdecimal/vector/VectorFastDecimalParallelBenchmark.java" beforeDir="false" afterPath="$PROJECT_DIR$/fast-decimal-benchmarks/src/main/java/org/tlr/fastdecimal/vector/VectorFastDecimalParallelBenchmark.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fast-decimal-benchmarks/src/main/java/org/tlr/fastdecimal/vector/VectorParallelVsSequentialBenchmark.java" beforeDir="false" afterPath="$PROJECT_DIR$/fast-decimal-benchmarks/src/main/java/org/tlr/fastdecimal/vector/VectorParallelVsSequentialBenchmark.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fast-decimal-valuetype/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/fast-decimal-valuetype/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fast-decimal-vector/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/fast-decimal-vector/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fast-decimal-vector/src/main/java/org/tlr/fastdecimal/vector/VectorFastDecimal.java" beforeDir="false" afterPath="$PROJECT_DIR$/fast-decimal-vector/src/main/java/org/tlr/fastdecimal/vector/VectorFastDecimal.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -16,7 +36,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="EmbeddingIndexingInfo">
-    <option name="cachedIndexableFilesCount" value="134" />
+    <option name="cachedIndexableFilesCount" value="152" />
     <option name="fileBasedEmbeddingIndicesEnabled" value="true" />
   </component>
   <component name="FileTemplateManagerImpl">
@@ -62,12 +82,15 @@
 }</component>
   <component name="HighlightingSettingsPerFile">
     <setting file="jar://$PROJECT_DIR$/../../../../Program Files/Eclipse Adoptium/jdk-24.0.0.36-hotspot/lib/src.zip!/java.base/java/util/ArrayList.java" root0="SKIP_INSPECTION" />
+    <setting file="jar://$MAVEN_REPOSITORY$/org/openjdk/jmh/jmh-core/1.37/jmh-core-1.37-sources.jar!/org/openjdk/jmh/annotations/BenchmarkMode.java" root0="SKIP_INSPECTION" />
+    <setting file="jar://$MAVEN_REPOSITORY$/org/openjdk/jmh/jmh-core/1.37/jmh-core-1.37-sources.jar!/org/openjdk/jmh/annotations/Mode.java" root0="SKIP_INSPECTION" />
   </component>
   <component name="MavenImportPreferences">
     <option name="generalSettings">
       <MavenGeneralSettings>
         <option name="customMavenHome" value="C:\dev\apache-maven-3.9.9" />
         <option name="mavenHomeTypeForPersistence" value="CUSTOM" />
+        <option name="useMavenConfig" value="false" />
       </MavenGeneralSettings>
     </option>
     <option name="importingSettings">
@@ -98,12 +121,15 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "Application.ComprehensiveBenchmark.executor": "Run",
+    "Application.FastDecimalBenchmark.executor": "Run",
+    "Application.FastDecimalVsValueBenchmark.executor": "Run",
     "Application.FastDecimalVsVectorBenchmark.executor": "Run",
     "Application.JCudaFastDecimalBenchmark.executor": "Run",
     "Application.ToStringBenchmark.executor": "Run",
     "Application.VectorFastDecimalBenchmark.executor": "Run",
     "Application.VectorFastDecimalParallelBenchmark.executor": "Run",
     "Application.VectorParallelVsSequentialBenchmark.executor": "Run",
+    "Application.org.tlr.fastdecimal.vector.FastDecimalVsVectorBenchmark.executor": "Run",
     "JUnit.ComprehensiveBenchmarkTest.executor": "Run",
     "JUnit.CudaDebugTest.executor": "Run",
     "JUnit.FastDecimalArithmeticComparisonTest.executor": "Run",
@@ -139,6 +165,8 @@
     "JUnit.StringCacheTest.executor": "Run",
     "JUnit.ToStringBenchmarkTest.executor": "Run",
     "JUnit.ToStringPerformanceTest.executor": "Run",
+    "JUnit.VectorFastDecimalDivisionTest.executor": "Run",
+    "JUnit.VectorFastDecimalMultiplicationTest.executor": "Run",
     "JUnit.VectorFastDecimalTest.executor": "Run",
     "JUnit.core in fast-decimal-core.executor": "Run",
     "JUnit.fastdecimal in fast-decimal.executor": "Run",
@@ -146,7 +174,13 @@
     "JUnit.org.tlr.fastdecimal.core in fast-decimal-core.executor": "Run",
     "JUnit.org.tlr.fastdecimal.vector in fast-decimal-vector.executor": "Run",
     "JUnit.vector in fast-decimal-vector.executor": "Run",
+    "Jmh.FastDecimalBenchmark.addFastDecimal$.executor": "Run",
+    "Jmh.FastDecimalVsVectorBenchmark.scalar_add$.executor": "Run",
     "Maven.Junie Maven test: org.tlr.fastdecimal.vector.VectorFastDecimalTest.executor": "Run",
+    "Maven.fast-decimal-benchmarks [clean,package].executor": "Run",
+    "Maven.fast-decimal-benchmarks [org.apache.maven.plugins:maven-shade-plugin:3.5.0:shade].executor": "Run",
+    "Maven.fast-decimal-benchmarks [package].executor": "Run",
+    "Maven.fast-decimal-parent [clean,package].executor": "Run",
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.MCP Project settings loaded": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
@@ -160,117 +194,136 @@
     "ignore.virus.scanning.warn.message": "true",
     "junie.onboarding.icon.badge.shown": "true",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/dev/projects/git/FastDecimal",
+    "last_opened_file_path": "C:/dev/projects/git/FastDecimal/jmh",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
     "onboarding.tips.debug.path": "C:/dev/projects/FastDecimal/src/main/java/org/tlr/Main.java",
-    "project.structure.last.edited": "SDKs",
+    "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.5471264",
-    "settings.editor.selected.configurable": "copyright.filetypes.XML",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
     "to.speed.mode.migration.done": "true",
     "update.copyright.on.save": "true",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
   <component name="RecapSpentCounter">
-    <option name="endsOfQuotaMs" value="1771689619000" />
-    <option name="spentUsd" value="0.0783796" />
+    <option name="endsOfQuotaMs" value="1774281619299" />
+    <option name="spentUsd" value="0.0814912" />
   </component>
   <component name="RecapUselessUpdatesCounter">
-    <option name="suspendCountdown" value="7" />
+    <option name="suspendCountdown" value="0" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\dev\projects\git\FastDecimal\jmh" />
+      <recent name="C:\dev\projects\git\FastDecimal\fast-decimal-valuetype\src\main\java\org\tlr\fastdecimal\valuetype" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\dev\projects\git\FastDecimal\jmh" />
+    </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="org.tlr.fastdecimal" />
     </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="org.tlr.fastdecimal.vector.valuetype" />
+      <recent name="org.tlr.fastdecimal.valuetype" />
+    </key>
   </component>
-  <component name="RunManager" selected="JUnit.FastDecimalDivideComparisonTest">
-    <configuration name="FastDecimalArithmeticComparisonTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="fast-decimal-core" />
+  <component name="RunManager" selected="Application.FastDecimalVsValueBenchmark">
+    <configuration name="FastDecimalBenchmark" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="org.tlr.fastdecimal.core.FastDecimalBenchmark" />
+      <module name="fast-decimal-benchmarks" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="org.tlr.fastdecimal.core.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="org.tlr.fastdecimal.core" />
-      <option name="MAIN_CLASS_NAME" value="org.tlr.fastdecimal.core.FastDecimalArithmeticComparisonTest" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="FastDecimalVsValueBenchmark" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="org.tlr.fastdecimal.valuetype.FastDecimalVsValueBenchmark" />
+      <module name="fast-decimal-benchmarks" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.tlr.fastdecimal.valuetype.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ValueFastDecimalVsVectorBenchmark" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="org.tlr.fastdecimal.valuetype.ValueFastDecimalVsVectorBenchmark" />
+      <module name="fast-decimal-benchmarks" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.tlr.fastdecimal.valuetype.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ValueFastDecimalTest" type="JUnit" factoryName="JUnit" nameIsGenerated="true">
+      <module name="fast-decimal-valuetype" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.tlr.fastdecimal.valuetype.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="org.tlr.fastdecimal.valuetype" />
+      <option name="MAIN_CLASS_NAME" value="org.tlr.fastdecimal.valuetype.ValueFastDecimalTest" />
+      <option name="METHOD_NAME" value="" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="FastDecimalDivideComparisonTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="fast-decimal-core" />
+    <configuration name="VectorFastDecimalTest" type="JUnit" factoryName="JUnit" nameIsGenerated="true">
+      <module name="fast-decimal-vector" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="org.tlr.fastdecimal.core.*" />
+          <option name="PATTERN" value="org.tlr.fastdecimal.vector.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="org.tlr.fastdecimal.core" />
-      <option name="MAIN_CLASS_NAME" value="org.tlr.fastdecimal.core.FastDecimalDivideComparisonTest" />
+      <option name="PACKAGE_NAME" value="org.tlr.fastdecimal.vector" />
+      <option name="MAIN_CLASS_NAME" value="org.tlr.fastdecimal.vector.VectorFastDecimalTest" />
+      <option name="METHOD_NAME" value="" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="FastDecimalTest$ConstantsTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="fast-decimal-core" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="org.tlr.fastdecimal.core.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="org.tlr.fastdecimal.core.FastDecimalTest" />
-      <option name="MAIN_CLASS_NAME" value="org.tlr.fastdecimal.core.FastDecimalTest$ConstantsTests" />
-      <option name="TEST_OBJECT" value="class" />
+    <configuration name="FastDecimalBenchmark.addFastDecimal$" type="jmh-id" temporary="true" program-parameters="org.tlr.fastdecimal.core.FastDecimalBenchmark.addFastDecimal$" working-dir="$MODULE_WORKING_DIR$" benchmark-type="METHOD" benchmark-class="org.tlr.fastdecimal.core.FastDecimalBenchmark" isAlternativeJrePathEnabled="false">
+      <module name="fast-decimal-benchmarks" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="FastDecimalTest$ConversionTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="fast-decimal-core" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="org.tlr.fastdecimal.core.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="org.tlr.fastdecimal.core.FastDecimalTest" />
-      <option name="MAIN_CLASS_NAME" value="org.tlr.fastdecimal.core.FastDecimalTest$ConversionTests" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="FastDecimalTest$ScaleTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="fast-decimal-core" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="org.tlr.fastdecimal.core.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="org.tlr.fastdecimal.core.FastDecimalTest" />
-      <option name="MAIN_CLASS_NAME" value="org.tlr.fastdecimal.core.FastDecimalTest$ScaleTests" />
-      <option name="TEST_OBJECT" value="class" />
+    <configuration name="FastDecimalVsVectorBenchmark.scalar_add$" type="jmh-id" temporary="true" program-parameters="org.tlr.fastdecimal.vector.FastDecimalVsVectorBenchmark.scalar_add$" working-dir="$MODULE_WORKING_DIR$" benchmark-type="METHOD" benchmark-class="org.tlr.fastdecimal.vector.FastDecimalVsVectorBenchmark" isAlternativeJrePathEnabled="false">
+      <module name="fast-decimal-benchmarks" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.FastDecimalDivideComparisonTest" />
-        <item itemvalue="JUnit.FastDecimalArithmeticComparisonTest" />
-        <item itemvalue="JUnit.FastDecimalTest$ConstantsTests" />
-        <item itemvalue="JUnit.FastDecimalTest$ConversionTests" />
-        <item itemvalue="JUnit.FastDecimalTest$ScaleTests" />
+        <item itemvalue="Application.FastDecimalVsValueBenchmark" />
+        <item itemvalue="Application.FastDecimalBenchmark" />
+        <item itemvalue="Jmh.FastDecimalBenchmark.addFastDecimal$" />
+        <item itemvalue="Application.ValueFastDecimalVsVectorBenchmark" />
+        <item itemvalue="Jmh.FastDecimalVsVectorBenchmark.scalar_add$" />
       </list>
     </recent_temporary>
   </component>
@@ -356,7 +409,15 @@
       <workItem from="1769162842172" duration="1737000" />
       <workItem from="1769164693389" duration="2565000" />
       <workItem from="1770277115109" duration="35000" />
-      <workItem from="1772784150889" duration="2623000" />
+      <workItem from="1772784150889" duration="6398000" />
+      <workItem from="1772810049354" duration="3855000" />
+      <workItem from="1772813997356" duration="14000" />
+      <workItem from="1772814291979" duration="623000" />
+      <workItem from="1772815023724" duration="3594000" />
+      <workItem from="1772818660233" duration="9111000" />
+      <workItem from="1773310460111" duration="638000" />
+      <workItem from="1773671027463" duration="2045000" />
+      <workItem from="1773848562388" duration="3726000" />
     </task>
     <task id="LOCAL-00001" summary="Refactorings&#10;&#10;- replaced methods ZERO, ONE and TEN with constant equivalents&#10;- added method getRawValue that returns scaledValue&#10;- added to .gitignore">
       <option name="closed" value="true" />
@@ -502,7 +563,15 @@
       <option name="project" value="LOCAL" />
       <updated>1772786652520</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="main&#10;&#10;- prepared for ValueTypes">
+      <option name="closed" value="true" />
+      <created>1772806290641</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1772806290641</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

@@ -42,15 +42,19 @@ import java.util.concurrent.TimeUnit;
  * This specifically measures the addParallel, subtractParallel, multiplyParallel,
  * and divideParallel methods on arrays of FastDecimal values.
  */
-@BenchmarkMode(Mode.AverageTime)
-@OutputTimeUnit(TimeUnit.MICROSECONDS)
-@Warmup(iterations = 3, time = 1)
-@Measurement(iterations = 5, time = 1)
+@BenchmarkMode({Mode.AverageTime})
+@OutputTimeUnit(TimeUnit.NANOSECONDS)
+@Warmup(iterations = 3, time = 20, timeUnit = TimeUnit.SECONDS)
+@Measurement(iterations = 5, time = 20, timeUnit = TimeUnit.SECONDS)
 @Fork(value = 1, jvmArgs = {"--add-modules=jdk.incubator.vector", "--enable-preview"})
-@State(Scope.Thread)
+@State(Scope.Benchmark)
 public class VectorFastDecimalParallelBenchmark {
 
-    @Param({"256", "2048", "16384"})
+    @Param({"128",
+            "256",
+            "512",
+            "1024"
+    })
     private int size;
 
     private FastDecimal[] a;

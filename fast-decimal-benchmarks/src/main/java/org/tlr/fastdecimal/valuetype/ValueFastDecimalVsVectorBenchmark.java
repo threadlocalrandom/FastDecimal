@@ -24,7 +24,7 @@
  * /
  */
 
-package org.tlr.fastdecimal.vector;
+package org.tlr.fastdecimal.valuetype;
 
 import org.openjdk.jmh.annotations.*;
 import org.openjdk.jmh.infra.Blackhole;
@@ -32,7 +32,7 @@ import org.openjdk.jmh.runner.Runner;
 import org.openjdk.jmh.runner.RunnerException;
 import org.openjdk.jmh.runner.options.Options;
 import org.openjdk.jmh.runner.options.OptionsBuilder;
-import org.tlr.fastdecimal.core.FastDecimal;
+import org.tlr.fastdecimal.vector.valuetype.VectorFastDecimal;
 
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
@@ -48,7 +48,7 @@ import java.util.concurrent.TimeUnit;
 @Measurement(iterations = 5, time = 20, timeUnit = TimeUnit.SECONDS)
 @Fork(value = 1, jvmArgs = {"--add-modules=jdk.incubator.vector", "--enable-preview"})
 @State(Scope.Benchmark)
-public class FastDecimalVsVectorBenchmark {
+public class ValueFastDecimalVsVectorBenchmark {
 
     @Param({"128",
             "256",
@@ -57,23 +57,24 @@ public class FastDecimalVsVectorBenchmark {
     })
     private int size;
 
-    private FastDecimal[] a;
-    private FastDecimal[] b;
-
-    private FastDecimal[] out;
+    private ValueFastDecimal[] a;
+    private ValueFastDecimal[] b;
+    private ValueFastDecimal[] out;
 
     @Setup
     public void setup() {
         Random rnd = new Random(42);
-        a = new FastDecimal[size];
-        b = new FastDecimal[size];
-        out = new FastDecimal[size];
+
+        a = new ValueFastDecimal[size];
+        b = new ValueFastDecimal[size];
+        out = new ValueFastDecimal[size];
+
         for (int i = 0; i < size; i++) {
             // Range chosen to keep values reasonable for fixed 4-dec scale, avoid overflow
             double v1 = (rnd.nextDouble() * 2000.0) - 1000.0; // [-1000, 1000)
             double v2 = (rnd.nextDouble() * 2000.0) - 1000.0; // [-1000, 1000)
-            a[i] = FastDecimal.of(v1);
-            b[i] = FastDecimal.of(v2 == 0.0 ? 1.0 : v2); // avoid zeros for division
+            a[i] = ValueFastDecimal.of(v1);
+            b[i] = ValueFastDecimal.of(v2 == 0.0 ? 1.0 : v2); // avoid zeros for division
         }
     }
 
@@ -89,6 +90,7 @@ public class FastDecimalVsVectorBenchmark {
 
     @Benchmark
     public void vector_add(Blackhole bh) {
+        out = VectorFastDecimal.add(a, b);
         bh.consume(out);
     }
 
@@ -104,7 +106,7 @@ public class FastDecimalVsVectorBenchmark {
 
     @Benchmark
     public void vector_subtract(Blackhole bh) {
-        FastDecimal[] out = VectorFastDecimal.subtract(a, b);
+        out = VectorFastDecimal.subtract(a, b);
         bh.consume(out);
     }
 
@@ -120,7 +122,7 @@ public class FastDecimalVsVectorBenchmark {
 
     @Benchmark
     public void vector_multiply(Blackhole bh) {
-        FastDecimal[] out = VectorFastDecimal.multiply(a, b);
+        out = VectorFastDecimal.multiply(a, b);
         bh.consume(out);
     }
 
@@ -136,7 +138,7 @@ public class FastDecimalVsVectorBenchmark {
 
     @Benchmark
     public void vector_divide(Blackhole bh) {
-        FastDecimal[] out = VectorFastDecimal.divide(a, b);
+        out = VectorFastDecimal.divide(a, b);
         bh.consume(out);
     }
 
@@ -146,7 +148,7 @@ public class FastDecimalVsVectorBenchmark {
     @SuppressWarnings("unused")
     public static void main(String[] args) throws RunnerException {
         Options opt = new OptionsBuilder()
-                .include(FastDecimalVsVectorBenchmark.class.getSimpleName())
+                .include(ValueFastDecimalVsVectorBenchmark.class.getSimpleName())
                 .build();
         new Runner(opt).run();
     }

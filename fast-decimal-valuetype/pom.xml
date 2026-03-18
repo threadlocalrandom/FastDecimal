@@ -13,6 +13,9 @@
     <artifactId>fast-decimal-valuetype</artifactId>
     <name>Fast Decimal Value Type</name>
     <description>Value type (Project Valhalla) implementation for the FastDecimal library</description>
+    <properties>
+        <maven.compiler.release>26</maven.compiler.release>
+    </properties>
 
     <dependencies>
         <dependency>

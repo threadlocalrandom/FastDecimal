@@ -45,15 +45,20 @@ import java.util.concurrent.TimeUnit;
  * It focuses only on VectorFastDecimal.* methods to offer a fair comparison
  * between non-parallel and parallel implementations.
  */
-@BenchmarkMode(Mode.All)
-@OutputTimeUnit(TimeUnit.MICROSECONDS)
-@Warmup(iterations = 3, time = 1)
-@Measurement(iterations = 5, time = 1)
+@BenchmarkMode({Mode.AverageTime})
+@OutputTimeUnit(TimeUnit.NANOSECONDS)
+@Warmup(iterations = 3, time = 20, timeUnit = TimeUnit.SECONDS)
+@Measurement(iterations = 5, time = 20, timeUnit = TimeUnit.SECONDS)
 @Fork(value = 1, jvmArgs = {"--add-modules=jdk.incubator.vector", "--enable-preview"})
-@State(Scope.Thread)
+@State(Scope.Benchmark)
 public class VectorParallelVsSequentialBenchmark {
 
-    @Param({"256", "2048", "16384"})
+    @Param({"128",
+            "256",
+            "512",
+            "1024"
+    })
+
     private int size;
 
     private FastDecimal[] a;
