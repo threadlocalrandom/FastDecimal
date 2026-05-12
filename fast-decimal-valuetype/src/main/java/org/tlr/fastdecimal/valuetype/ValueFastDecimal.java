@@ -26,6 +26,8 @@
 
 package org.tlr.fastdecimal.valuetype;
 
+import org.tlr.fastdecimal.core.FastDecimal;
+
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 

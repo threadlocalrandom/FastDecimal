@@ -1,11 +1,16 @@
 # FastDecimal Project Guidelines
 
 About this file
-- Purpose: This document centralizes build, test, and development guidelines for the FastDecimal project so contributors have a single source of setup and workflow truth.
-- Who uses it: Human contributors and the Junie assistant. Junie reads this file to align its actions (build, test, code changes) with the project’s conventions.
+
+- Purpose: This document centralizes build, test, and development guidelines for the FastDecimal project so contributors
+  have a single source of setup and workflow truth.
+- Who uses it: Human contributors and the Junie assistant. Junie reads this file to align its actions (build, test, code
+  changes) with the project’s conventions.
 - Where it lives: .junie/guidelines.md. It is documentation only and is not shipped in artifacts nor used at runtime.
-- Maintenance: Keep this file up to date when build requirements, test practices, or API/implementation details change. Update it in the same PR as those changes.
-- Source of truth: If anything here conflicts with code or tests, consider code/tests authoritative and then update this file to match.
+- Maintenance: Keep this file up to date when build requirements, test practices, or API/implementation details change.
+  Update it in the same PR as those changes.
+- Source of truth: If anything here conflicts with code or tests, consider code/tests authoritative and then update this
+  file to match.
 - Impact on code: None. Editing this file does not affect compilation, packaging, or performance.
 
 This document provides essential information for developers working on the FastDecimal project.
@@ -14,55 +19,70 @@ This document provides essential information for developers working on the FastD
 
 ### Prerequisites
 
+- after opening a bash console source the setupjdk27.sh script
 - Java 24 or higher
 - Maven 3.8 or higher
 
 ### Building the Project
+
 To build the project, run:
+
 ```bash
 mvn clean install
 ```
+
 ### Verifying the Project
+
 To build the project, run:
+
 ```bash
 mvn clean verify
 ```
 
 ### Project Structure
+
 - `src/main/java/org/tlr/fastdecimal/` - Main source code
 - `src/test/java/org/tlr/fastdecimal/` - Test code
 
 ## Testing Information
 
 ### Running Tests
+
 To run all tests:
+
 ```bash
 mvn test
 ```
 
 To run a specific test class:
+
 ```bash
 mvn test -Dtest=FastDecimalTest
 ```
 
 To run a specific test method:
+
 ```bash
 mvn test -Dtest=FastDecimalTest#testToBigDecimal
 ```
 
 ### Adding New Tests
+
 1. Create a new test class in the `src/test/java/org/tlr/fastdecimal/` directory
 2. Extend the test class with JUnit 5 annotations
 3. Follow the existing test patterns
 
 ### Test Example
+
 Here's a simple test example:
 
 ```java
 package org.tlr.fastdecimal;
 
 import org.junit.jupiter.api.Test;
+
 import java.math.BigDecimal;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class FastDecimalTest {
@@ -70,8 +90,8 @@ public class FastDecimalTest {
     public void testToBigDecimal() {
         FastDecimal decimal = FastDecimal.of("123");
         BigDecimal bigDecimal = decimal.toBigDecimal();
-        assertEquals(new BigDecimal("12.3"), bigDecimal, 
-                    "FastDecimal should convert to correct BigDecimal");
+        assertEquals(new BigDecimal("12.3"), bigDecimal,
+                "FastDecimal should convert to correct BigDecimal");
     }
 }
 ```
@@ -79,32 +99,38 @@ public class FastDecimalTest {
 ## Additional Development Information
 
 ### Code Style
+
 - Follow standard Java code style conventions
 - Use meaningful variable and method names
 - Add JavaDoc comments for public methods and classes
 
 ### Implementation Details
+
 - FastDecimal uses a long value scaled by 10,000 for internal representation
 - The `toBigDecimal()` method converts the internal representation to a BigDecimal with proper scale
 - Trailing zeros are stripped from BigDecimal representations
 - The following methods are to be implemented using fixed decimal algorithms
-  1. add
-  2. subtract
-  3. multiply
-  4. divide
+    1. add
+    2. subtract
+    3. multiply
+    4. divide
 
 ### Performance Considerations
+
 - FastDecimal is designed for high-performance decimal arithmetic
 - It avoids the overhead of BigDecimal for simple operations
 - For complex operations or when precision is critical, convert to BigDecimal
 
 ### Extending the Library
+
 When adding new functionality:
+
 1. Add the method to the FastDecimal interface
 2. Implement the method in FastDecimalImpl
 3. Add appropriate tests
 4. Update documentation
 
 ### Debugging Tips
+
 - Use the toString() method to get a string representation of FastDecimal values
 - Check the internal state using the State enum (FINITE, INFINITE, UNKNOWN)

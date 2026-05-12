@@ -7,28 +7,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a977d7bc-f555-4ab7-9cc6-5b2fba473db7" name="Changes" comment="main&#10;&#10;- prepared for ValueTypes">
-      <change afterPath="$PROJECT_DIR$/fast-decimal-benchmarks/src/main/java/org/tlr/fastdecimal/valuetype/ValueFastDecimalBenchmark.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/fast-decimal-benchmarks/src/main/java/org/tlr/fastdecimal/valuetype/ValueFastDecimalVsVectorBenchmark.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/fast-decimal-valuetype/src/main/java/org/tlr/fastdecimal/valuetype/ValueFastDecimal.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/fast-decimal-vector/src/main/java/org/tlr/fastdecimal/vector/valuetype/VectorFastDecimal.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/jmh/vector.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="a977d7bc-f555-4ab7-9cc6-5b2fba473db7" name="Changes" comment="First JMH run on the GX10&#10;&#10;-  new JMH results">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fast-decimal-benchmarks/dependency-reduced-pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/fast-decimal-benchmarks/dependency-reduced-pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fast-decimal-benchmarks/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/fast-decimal-benchmarks/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fast-decimal-benchmarks/src/main/java/org/tlr/fastdecimal/core/ComprehensiveBenchmark.java" beforeDir="false" afterPath="$PROJECT_DIR$/fast-decimal-benchmarks/src/main/java/org/tlr/fastdecimal/core/ComprehensiveBenchmark.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fast-decimal-benchmarks/src/main/java/org/tlr/fastdecimal/core/FastDecimalBenchmark.java" beforeDir="false" afterPath="$PROJECT_DIR$/fast-decimal-benchmarks/src/main/java/org/tlr/fastdecimal/core/FastDecimalBenchmark.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fast-decimal-benchmarks/src/main/java/org/tlr/fastdecimal/core/ToStringBenchmark.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fast-decimal-benchmarks/src/main/java/org/tlr/fastdecimal/vector/FastDecimalVsVectorBenchmark.java" beforeDir="false" afterPath="$PROJECT_DIR$/fast-decimal-benchmarks/src/main/java/org/tlr/fastdecimal/vector/FastDecimalVsVectorBenchmark.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fast-decimal-benchmarks/src/main/java/org/tlr/fastdecimal/vector/VectorFastDecimalBenchmark.java" beforeDir="false" afterPath="$PROJECT_DIR$/fast-decimal-benchmarks/src/main/java/org/tlr/fastdecimal/vector/VectorFastDecimalBenchmark.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fast-decimal-benchmarks/src/main/java/org/tlr/fastdecimal/vector/VectorFastDecimalParallelBenchmark.java" beforeDir="false" afterPath="$PROJECT_DIR$/fast-decimal-benchmarks/src/main/java/org/tlr/fastdecimal/vector/VectorFastDecimalParallelBenchmark.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fast-decimal-benchmarks/src/main/java/org/tlr/fastdecimal/vector/VectorParallelVsSequentialBenchmark.java" beforeDir="false" afterPath="$PROJECT_DIR$/fast-decimal-benchmarks/src/main/java/org/tlr/fastdecimal/vector/VectorParallelVsSequentialBenchmark.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fast-decimal-valuetype/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/fast-decimal-valuetype/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fast-decimal-vector/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/fast-decimal-vector/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fast-decimal-vector/src/main/java/org/tlr/fastdecimal/vector/VectorFastDecimal.java" beforeDir="false" afterPath="$PROJECT_DIR$/fast-decimal-vector/src/main/java/org/tlr/fastdecimal/vector/VectorFastDecimal.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,7 +16,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="EmbeddingIndexingInfo">
-    <option name="cachedIndexableFilesCount" value="152" />
+    <option name="cachedIndexableFilesCount" value="170" />
     <option name="fileBasedEmbeddingIndicesEnabled" value="true" />
   </component>
   <component name="FileTemplateManagerImpl">
@@ -67,7 +47,7 @@
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;https://github.com/threadlocalrandom/FastDecimal.git&quot;,
-    &quot;accountId&quot;: &quot;886e1e79-c4d9-4866-8952-9251ff25c798&quot;
+    &quot;accountId&quot;: &quot;3336f077-d0ce-4e2c-ba50-680814116d90&quot;
   },
   &quot;recentNewPullRequestHead&quot;: {
     &quot;server&quot;: {
@@ -126,6 +106,8 @@
     "Application.FastDecimalVsVectorBenchmark.executor": "Run",
     "Application.JCudaFastDecimalBenchmark.executor": "Run",
     "Application.ToStringBenchmark.executor": "Run",
+    "Application.ValueFastDecimalBenchmark.executor": "Run",
+    "Application.ValueFastDecimalVsVectorBenchmark.executor": "Run",
     "Application.VectorFastDecimalBenchmark.executor": "Run",
     "Application.VectorFastDecimalParallelBenchmark.executor": "Run",
     "Application.VectorParallelVsSequentialBenchmark.executor": "Run",
@@ -177,9 +159,11 @@
     "Jmh.FastDecimalBenchmark.addFastDecimal$.executor": "Run",
     "Jmh.FastDecimalVsVectorBenchmark.scalar_add$.executor": "Run",
     "Maven.Junie Maven test: org.tlr.fastdecimal.vector.VectorFastDecimalTest.executor": "Run",
+    "Maven.fast-decimal-benchmarks [clean,install].executor": "Run",
     "Maven.fast-decimal-benchmarks [clean,package].executor": "Run",
     "Maven.fast-decimal-benchmarks [org.apache.maven.plugins:maven-shade-plugin:3.5.0:shade].executor": "Run",
     "Maven.fast-decimal-benchmarks [package].executor": "Run",
+    "Maven.fast-decimal-parent [clean,install].executor": "Run",
     "Maven.fast-decimal-parent [clean,package].executor": "Run",
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.MCP Project settings loaded": "true",
@@ -187,14 +171,17 @@
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
     "RunOnceActivity.git.unshallow": "true",
     "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "SHELLCHECK.PATH": "/home/andy/.local/share/JetBrains/IntelliJIdea2026.1/Shell Script/shellcheck",
+    "Shell Script.setupkdk27.sh.executor": "Run",
+    "codeWithMe.voiceChat.enabledByDefault": "false",
     "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
     "full.screen.before.presentation.mode": "false",
-    "git-widget-placeholder": "main",
+    "git-widget-placeholder": "Valhalla",
     "ignore.preview.features.used": "true",
     "ignore.virus.scanning.warn.message": "true",
     "junie.onboarding.icon.badge.shown": "true",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/dev/projects/git/FastDecimal/jmh",
+    "last_opened_file_path": "/home/andy/.profile",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -223,6 +210,7 @@
       <recent name="C:\dev\projects\git\FastDecimal\fast-decimal-valuetype\src\main\java\org\tlr\fastdecimal\valuetype" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/jmh" />
       <recent name="C:\dev\projects\git\FastDecimal\jmh" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
@@ -233,7 +221,7 @@
       <recent name="org.tlr.fastdecimal.valuetype" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.FastDecimalVsValueBenchmark">
+  <component name="RunManager" selected="Application.ValueFastDecimalVsVectorBenchmark">
     <configuration name="FastDecimalBenchmark" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="org.tlr.fastdecimal.core.FastDecimalBenchmark" />
       <module name="fast-decimal-benchmarks" />
@@ -248,8 +236,27 @@
       </method>
     </configuration>
     <configuration name="FastDecimalVsValueBenchmark" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="ALTERNATIVE_JRE_PATH" value="27" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
       <option name="MAIN_CLASS_NAME" value="org.tlr.fastdecimal.valuetype.FastDecimalVsValueBenchmark" />
       <module name="fast-decimal-benchmarks" />
+      <option name="PROGRAM_PARAMETERS" value="--enable-preview" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.tlr.fastdecimal.valuetype.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ValueFastDecimalBenchmark" type="Application" factoryName="Application" nameIsGenerated="true">
+      <option name="ALTERNATIVE_JRE_PATH" value="27" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
+      <option name="MAIN_CLASS_NAME" value="org.tlr.fastdecimal.valuetype.ValueFastDecimalBenchmark" />
+      <module name="fast-decimal-benchmarks" />
+      <option name="VM_PARAMETERS" value="--enable-preview" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="org.tlr.fastdecimal.valuetype.*" />
@@ -269,6 +276,19 @@
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="All in fast-decimal-valuetype" type="JUnit" factoryName="JUnit" nameIsGenerated="true">
+      <module name="fast-decimal-valuetype" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
+      <option name="ALTERNATIVE_JRE_PATH" value="27" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="TEST_OBJECT" value="package" />
+      <option name="VM_PARAMETERS" value="-ea --enable-preview" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -305,11 +325,20 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="FastDecimalBenchmark.addFastDecimal$" type="jmh-id" temporary="true" program-parameters="org.tlr.fastdecimal.core.FastDecimalBenchmark.addFastDecimal$" working-dir="$MODULE_WORKING_DIR$" benchmark-type="METHOD" benchmark-class="org.tlr.fastdecimal.core.FastDecimalBenchmark" isAlternativeJrePathEnabled="false">
-      <module name="fast-decimal-benchmarks" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
+    <configuration name="setupkdk27.sh" type="ShConfigurationType" temporary="true">
+      <option name="SCRIPT_TEXT" value="" />
+      <option name="INDEPENDENT_SCRIPT_PATH" value="true" />
+      <option name="SCRIPT_PATH" value="$PROJECT_DIR$/setupkdk27.sh" />
+      <option name="SCRIPT_OPTIONS" value="" />
+      <option name="INDEPENDENT_SCRIPT_WORKING_DIRECTORY" value="true" />
+      <option name="SCRIPT_WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="INDEPENDENT_INTERPRETER_PATH" value="true" />
+      <option name="INTERPRETER_PATH" value="/bin/sh" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="EXECUTE_IN_TERMINAL" value="true" />
+      <option name="EXECUTE_SCRIPT_FILE" value="true" />
+      <envs />
+      <method v="2" />
     </configuration>
     <configuration name="FastDecimalVsVectorBenchmark.scalar_add$" type="jmh-id" temporary="true" program-parameters="org.tlr.fastdecimal.vector.FastDecimalVsVectorBenchmark.scalar_add$" working-dir="$MODULE_WORKING_DIR$" benchmark-type="METHOD" benchmark-class="org.tlr.fastdecimal.vector.FastDecimalVsVectorBenchmark" isAlternativeJrePathEnabled="false">
       <module name="fast-decimal-benchmarks" />
@@ -317,13 +346,22 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <list>
+      <item itemvalue="Application.ValueFastDecimalBenchmark" />
+      <item itemvalue="Application.FastDecimalBenchmark" />
+      <item itemvalue="Application.FastDecimalVsValueBenchmark" />
+      <item itemvalue="Application.ValueFastDecimalVsVectorBenchmark" />
+      <item itemvalue="Jmh.FastDecimalVsVectorBenchmark.scalar_add$" />
+      <item itemvalue="JUnit.All in fast-decimal-valuetype" />
+      <item itemvalue="JUnit.ValueFastDecimalTest" />
+      <item itemvalue="JUnit.VectorFastDecimalTest" />
+      <item itemvalue="Shell Script.setupkdk27.sh" />
+    </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.ValueFastDecimalVsVectorBenchmark" />
         <item itemvalue="Application.FastDecimalVsValueBenchmark" />
         <item itemvalue="Application.FastDecimalBenchmark" />
-        <item itemvalue="Jmh.FastDecimalBenchmark.addFastDecimal$" />
-        <item itemvalue="Application.ValueFastDecimalVsVectorBenchmark" />
-        <item itemvalue="Jmh.FastDecimalVsVectorBenchmark.scalar_add$" />
       </list>
     </recent_temporary>
   </component>
@@ -418,6 +456,14 @@
       <workItem from="1773310460111" duration="638000" />
       <workItem from="1773671027463" duration="2045000" />
       <workItem from="1773848562388" duration="3726000" />
+      <workItem from="1777404007105" duration="8224000" />
+      <workItem from="1777449670760" duration="4000" />
+      <workItem from="1777929446753" duration="629000" />
+      <workItem from="1777930093754" duration="1199000" />
+      <workItem from="1777931304556" duration="116000" />
+      <workItem from="1777932089693" duration="5632000" />
+      <workItem from="1778052425822" duration="99000" />
+      <workItem from="1778052538182" duration="327000" />
     </task>
     <task id="LOCAL-00001" summary="Refactorings&#10;&#10;- replaced methods ZERO, ONE and TEN with constant equivalents&#10;- added method getRawValue that returns scaledValue&#10;- added to .gitignore">
       <option name="closed" value="true" />
@@ -571,7 +617,15 @@
       <option name="project" value="LOCAL" />
       <updated>1772806290641</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="First JMH run on the GX10&#10;&#10;-  new JMH results">
+      <option name="closed" value="true" />
+      <created>1777438173696</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1777438173696</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -606,7 +660,8 @@
     <MESSAGE value="main&#10;&#10;- removed .idea and files from .gitignore" />
     <MESSAGE value="main&#10;&#10;- updated copyright" />
     <MESSAGE value="main&#10;&#10;- prepared for ValueTypes" />
-    <option name="LAST_COMMIT_MESSAGE" value="main&#10;&#10;- prepared for ValueTypes" />
+    <MESSAGE value="First JMH run on the GX10&#10;&#10;-  new JMH results" />
+    <option name="LAST_COMMIT_MESSAGE" value="First JMH run on the GX10&#10;&#10;-  new JMH results" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>

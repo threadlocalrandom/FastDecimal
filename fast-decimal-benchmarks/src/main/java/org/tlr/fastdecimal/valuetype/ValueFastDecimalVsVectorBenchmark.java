@@ -50,10 +50,10 @@ import java.util.concurrent.TimeUnit;
 @State(Scope.Benchmark)
 public class ValueFastDecimalVsVectorBenchmark {
 
-    @Param({"128",
-            "256",
-            "512",
-            "1024"
+    @Param({
+            //"8192",
+            //"65536",
+            "268435456"
     })
     private int size;
 
@@ -71,10 +71,10 @@ public class ValueFastDecimalVsVectorBenchmark {
 
         for (int i = 0; i < size; i++) {
             // Range chosen to keep values reasonable for fixed 4-dec scale, avoid overflow
-            double v1 = (rnd.nextDouble() * 2000.0) - 1000.0; // [-1000, 1000)
-            double v2 = (rnd.nextDouble() * 2000.0) - 1000.0; // [-1000, 1000)
-            a[i] = ValueFastDecimal.of(v1);
-            b[i] = ValueFastDecimal.of(v2 == 0.0 ? 1.0 : v2); // avoid zeros for division
+            long v1 = rnd.nextLong(-1000_000, 1000_000);  // [-1000, 1000)
+            long v2 = rnd.nextLong(-1000_000, 1000_000);  // [-1000, 1000)
+            a[i] = ValueFastDecimal.fromScaledValue(v1);
+            b[i] = ValueFastDecimal.fromScaledValue(v2 == 0 ? 1 : v2); // avoid zeros for division
         }
     }
 
