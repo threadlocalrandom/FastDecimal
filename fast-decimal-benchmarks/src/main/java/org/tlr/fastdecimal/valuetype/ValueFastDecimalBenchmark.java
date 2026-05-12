@@ -74,20 +74,20 @@ public class ValueFastDecimalBenchmark {
 
     // Creation benchmarks
 
-    @Benchmark
-    public void createFastDecimalFromString(Blackhole blackhole) {
-        blackhole.consume(ValueFastDecimal.of(stringValue1));
-    }
+//    @Benchmark
+//    public void createFastDecimalFromString(Blackhole blackhole) {
+//        blackhole.consume(ValueFastDecimal.of(stringValue1));
+//    }
 
-    @Benchmark
-    public void createBigDecimalFromString(Blackhole blackhole) {
-        blackhole.consume(new BigDecimal(stringValue1));
-    }
+//    @Benchmark
+//    public void createBigDecimalFromString(Blackhole blackhole) {
+//        blackhole.consume(new BigDecimal(stringValue1));
+//    }
 
-    @Benchmark
-    public void createFastDecimalFromDouble(Blackhole blackhole) {
-        blackhole.consume(ValueFastDecimal.of(doubleValue1));
-    }
+//    @Benchmark
+//    public void createFastDecimalFromDouble(Blackhole blackhole) {
+//        blackhole.consume(ValueFastDecimal.of(doubleValue1));
+//    }
 
     @Benchmark
     public void createBigDecimalFromDouble(Blackhole blackhole) {

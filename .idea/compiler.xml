@@ -25,10 +25,6 @@
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="fast-decimal" target="26" />
-      <module name="fast-decimal-benchmarks" target="26" />
-      <module name="fast-decimal-core" target="26" />
-      <module name="fast-decimal-valuetype" target="26" />
-      <module name="fast-decimal-vector" target="26" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">

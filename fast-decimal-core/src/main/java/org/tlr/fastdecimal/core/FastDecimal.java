@@ -29,6 +29,13 @@ package org.tlr.fastdecimal.core;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
+
+/**
+ * Benchmark                                 Mode  Cnt  Score   Error  Units
+ * FastDecimalBenchmark.multiplyBigDecimal   avgt  100  3.417 ± 0.027  ns/op
+ * FastDecimalBenchmark.multiplyFastDecimal  avgt  100  3.013 ± 0.102  ns/op
+ */
+
 /**
  * A high-performance decimal number implementation that uses a long value
  * scaled by 10,000 for internal representation.
@@ -286,15 +293,16 @@ public class FastDecimal implements Comparable<FastDecimal> {
 
     public FastDecimal multiply(FastDecimal other) {
         long product = scaledValue * other.scaledValue;
+        long quotient = product / SCALE_FACTOR;
+        long remainder = product % SCALE_FACTOR;
+        long absRemainder = Math.abs(remainder);
+        long absDivisor = Math.abs(SCALE_FACTOR);
         long result;
-        long absProduct = Math.abs(product);
-        long absRemainder = absProduct % SCALE_FACTOR;
-
-        if (absRemainder * 2 >= SCALE_FACTOR) {
-            long sign = ((scaledValue ^ other.scaledValue) >= 0) ? 1 : -1;
-            result = (product / SCALE_FACTOR) + sign;
+        if (absRemainder * 2 >= absDivisor) {
+            int sign = ((product ^ SCALE_FACTOR) >= 0) ? 1 : -1;
+            result = quotient + sign;
         } else {
-            result = product / SCALE_FACTOR;
+            result = quotient;
         }
         return new FastDecimal(result);
     }

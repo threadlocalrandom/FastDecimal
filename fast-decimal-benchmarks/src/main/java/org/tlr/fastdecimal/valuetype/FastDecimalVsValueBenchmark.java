@@ -41,9 +41,9 @@ import java.util.concurrent.TimeUnit;
  */
 @BenchmarkMode({Mode.AverageTime})
 @OutputTimeUnit(TimeUnit.NANOSECONDS)
-@Warmup(iterations = 3, time = 10, timeUnit = TimeUnit.SECONDS)
-@Measurement(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)
-@Fork(value = 1, jvmArgs = {"--enable-preview"})
+@Warmup(iterations = 5, time = 1000, timeUnit = TimeUnit.MILLISECONDS)
+@Measurement(iterations = 100, time = 1000, timeUnit = TimeUnit.MILLISECONDS)
+@Fork(value = 1, jvmArgs = {"--add-modules=jdk.incubator.vector", "--enable-preview"})
 @State(Scope.Benchmark)
 public class FastDecimalVsValueBenchmark {
 

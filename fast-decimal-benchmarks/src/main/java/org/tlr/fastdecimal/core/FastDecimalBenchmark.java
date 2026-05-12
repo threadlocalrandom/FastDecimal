@@ -28,14 +28,35 @@ package org.tlr.fastdecimal.core;
 
 import org.openjdk.jmh.annotations.*;
 import org.openjdk.jmh.infra.Blackhole;
-import org.openjdk.jmh.runner.Runner;
-import org.openjdk.jmh.runner.RunnerException;
-import org.openjdk.jmh.runner.options.Options;
-import org.openjdk.jmh.runner.options.OptionsBuilder;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.concurrent.TimeUnit;
+
+/**
+ * Benchmark                            Mode  Cnt  Score   Error  Units
+ * FastDecimalBenchmark.addFastDecimal  avgt  100  3.263 ± 0.089  ns/op
+ * <p>
+ * Benchmark                           Mode  Cnt  Score   Error  Units
+ * FastDecimalBenchmark.addBigDecimal  avgt  100  5.230 ± 0.124  ns/op
+ * <p>
+ * Benchmark                            Mode  Cnt  Score   Error  Units
+ * FastDecimalBenchmark.addBigDecimal   avgt  100  5.347 ± 0.133  ns/op
+ * FastDecimalBenchmark.addFastDecimal  avgt  100  3.395 ± 0.093  ns/op
+ * <p>
+ * Benchmark                                 Mode  Cnt  Score   Error  Units
+ * FastDecimalBenchmark.subtractBigDecimal   avgt  100  5.873 ± 0.138  ns/op
+ * FastDecimalBenchmark.subtractFastDecimal  avgt  100  3.327 ± 0.086  ns/op
+ * <p>
+ * Benchmark                                 Mode  Cnt  Score   Error  Units
+ * FastDecimalBenchmark.multiplyBigDecimal   avgt  100  3.252 ± 0.008  ns/op
+ * FastDecimalBenchmark.multiplyFastDecimal  avgt  100  2.612 ± 0.015  ns/op
+ * <p>
+ * Benchmark                               Mode  Cnt  Score   Error  Units
+ * FastDecimalBenchmark.divideBigDecimal   avgt  100  6.328 ± 0.036  ns/op
+ * FastDecimalBenchmark.divideFastDecimal  avgt  100  3.061 ± 0.056  ns/op
+ */
+
 
 /**
  * JMH benchmark to compare the performance of BigDecimal and FastDecimal.
@@ -46,8 +67,8 @@ import java.util.concurrent.TimeUnit;
  */
 @BenchmarkMode({Mode.AverageTime})
 @OutputTimeUnit(TimeUnit.NANOSECONDS)
-@Warmup(iterations = 3, time = 20, timeUnit = TimeUnit.SECONDS)
-@Measurement(iterations = 5, time = 20, timeUnit = TimeUnit.SECONDS)
+@Warmup(iterations = 5, time = 1000, timeUnit = TimeUnit.MILLISECONDS)
+@Measurement(iterations = 100, time = 1000, timeUnit = TimeUnit.MILLISECONDS)
 @Fork(value = 1, jvmArgs = {"--add-modules=jdk.incubator.vector", "--enable-preview"})
 @State(Scope.Benchmark)
 public class FastDecimalBenchmark {
@@ -95,49 +116,48 @@ public class FastDecimalBenchmark {
     }
 
     // Addition benchmarks
-
-    @Benchmark
+//    @Benchmark
     public void addFastDecimal(Blackhole blackhole) {
         blackhole.consume(fastDecimal1.add(fastDecimal2));
     }
 
-    @Benchmark
+    //    @Benchmark
     public void addBigDecimal(Blackhole blackhole) {
         blackhole.consume(bigDecimal1.add(bigDecimal2));
     }
 
     // Subtraction benchmarks
 
-    // @Benchmark
+    //    @Benchmark
     public void subtractFastDecimal(Blackhole blackhole) {
         blackhole.consume(fastDecimal1.subtract(fastDecimal2));
     }
 
-    // @Benchmark
+    //    @Benchmark
     public void subtractBigDecimal(Blackhole blackhole) {
         blackhole.consume(bigDecimal1.subtract(bigDecimal2));
     }
 
     // Multiplication benchmarks
 
-    // @Benchmark
+    @Benchmark
     public void multiplyFastDecimal(Blackhole blackhole) {
         blackhole.consume(fastDecimal1.multiply(fastDecimal2));
     }
 
-    // @Benchmark
+    @Benchmark
     public void multiplyBigDecimal(Blackhole blackhole) {
         blackhole.consume(bigDecimal1.multiply(bigDecimal2));
     }
 
     // Division benchmarks
 
-    // @Benchmark
+    //    @Benchmark
     public void divideFastDecimal(Blackhole blackhole) {
         blackhole.consume(fastDecimal1.divide(fastDecimal2));
     }
 
-    // @Benchmark
+    //    @Benchmark
     public void divideBigDecimal(Blackhole blackhole) {
         blackhole.consume(bigDecimal1.divide(bigDecimal2, RoundingMode.HALF_UP));
     }
@@ -169,11 +189,11 @@ public class FastDecimalBenchmark {
     /**
      * Main method to run the benchmark from IDE.
      */
-    @SuppressWarnings("unused")
-    static void main(String[] args) throws RunnerException {
-        Options options = new OptionsBuilder()
-                .include(FastDecimalBenchmark.class.getSimpleName())
-                .build();
-        new Runner(options).run();
-    }
+//    @SuppressWarnings("unused")
+//    static void main(String[] args) throws RunnerException {
+//        Options options = new OptionsBuilder()
+//                .include(FastDecimalBenchmark.class.getSimpleName())
+//                .build();
+//        new Runner(options).run();
+//    }
 }
