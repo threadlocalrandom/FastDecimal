@@ -7,9 +7,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a977d7bc-f555-4ab7-9cc6-5b2fba473db7" name="Changes" comment="First JMH run on the GX10&#10;&#10;-  new JMH results">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="a977d7bc-f555-4ab7-9cc6-5b2fba473db7" name="Changes" comment="First JMH run on the GX10&#10;&#10;-  new JMH results" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
