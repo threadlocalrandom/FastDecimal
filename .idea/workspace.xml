@@ -8,14 +8,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a977d7bc-f555-4ab7-9cc6-5b2fba473db7" name="Changes" comment="main&#10;&#10;- prepared for ValueTypes">
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fast-decimal-benchmarks/dependency-reduced-pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/fast-decimal-benchmarks/dependency-reduced-pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fast-decimal-benchmarks/src/main/java/org/tlr/fastdecimal/core/FastDecimalBenchmark.java" beforeDir="false" afterPath="$PROJECT_DIR$/fast-decimal-benchmarks/src/main/java/org/tlr/fastdecimal/core/FastDecimalBenchmark.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fast-decimal-benchmarks/src/main/java/org/tlr/fastdecimal/valuetype/FastDecimalVsValueBenchmark.java" beforeDir="false" afterPath="$PROJECT_DIR$/fast-decimal-benchmarks/src/main/java/org/tlr/fastdecimal/valuetype/FastDecimalVsValueBenchmark.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fast-decimal-benchmarks/src/main/java/org/tlr/fastdecimal/valuetype/ValueFastDecimalBenchmark.java" beforeDir="false" afterPath="$PROJECT_DIR$/fast-decimal-benchmarks/src/main/java/org/tlr/fastdecimal/valuetype/ValueFastDecimalBenchmark.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fast-decimal-core/src/main/java/org/tlr/fastdecimal/core/FastDecimal.java" beforeDir="false" afterPath="$PROJECT_DIR$/fast-decimal-core/src/main/java/org/tlr/fastdecimal/core/FastDecimal.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fast-decimal-core/src/test/java/org/tlr/fastdecimal/core/FastDecimalDivideComparisonTest.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -191,7 +184,7 @@
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
     "onboarding.tips.debug.path": "C:/dev/projects/FastDecimal/src/main/java/org/tlr/Main.java",
-    "project.structure.last.edited": "SDKs",
+    "project.structure.last.edited": "Project",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.5471264",
     "settings.editor.selected.configurable": "preferences.pluginManager",
@@ -304,11 +297,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.FastDecimalVsValueBenchmark" />
+        <item itemvalue="Jmh.FastDecimalBenchmark.addFastDecimal$" />
+        <item itemvalue="Jmh.FastDecimalBenchmark.addBigDecimal$" />
         <item itemvalue="Jmh.FastDecimalBenchmark.*" />
         <item itemvalue="JUnit.FastDecimalArithmeticComparisonTest" />
-        <item itemvalue="Jmh.FastDecimalBenchmark.addBigDecimal$" />
-        <item itemvalue="Jmh.FastDecimalBenchmark.addFastDecimal$" />
+        <item itemvalue="Application.FastDecimalVsValueBenchmark" />
       </list>
     </recent_temporary>
   </component>
@@ -412,6 +405,10 @@
       <workItem from="1778052227290" duration="269000" />
       <workItem from="1778052613626" duration="782000" />
       <workItem from="1778056311032" duration="1197000" />
+      <workItem from="1778587351346" duration="667000" />
+      <workItem from="1778754168045" duration="53000" />
+      <workItem from="1778754252458" duration="55000" />
+      <workItem from="1778754323203" duration="1050000" />
     </task>
     <task id="LOCAL-00001" summary="Refactorings&#10;&#10;- replaced methods ZERO, ONE and TEN with constant equivalents&#10;- added method getRawValue that returns scaledValue&#10;- added to .gitignore">
       <option name="closed" value="true" />
